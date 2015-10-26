@@ -7,6 +7,16 @@
     /**
      * Configuration class
      * @author Art <a.molcanovas@gmail.com>
+     *
+     * @property int    $cleanupFrequency Probability of a session cleanup to be called on request. Entering 100 would
+     *                                 mean
+     *                                 that there is a 1/100 chance.
+     * @property int    $timeout          Session timeout
+     * @property string $cookie           Session cookie name
+     * @property string $fingerprint      Session fingerprint name. This is used to prevent session hijacking and you
+     *           must not set any session values using this key.
+     * @property string $prefix           How to prefix session keys if using cache engine-based handlers
+     * @property bool   $secure           If set to true the session cookie will only be sent via HTTPS connections
      */
     class Config extends AbstractConfig {
 
