@@ -1,6 +1,6 @@
 {
   "name": "aloframework/session",
-  "description": "Common elements of AloFramework",
+  "description": "Session manager of AloFramework",
   "prefer-stable": true,
   "type": "library",
   "license": "GPL-3.0+",
@@ -25,7 +25,6 @@
   },
   "require": {
     "php": ">=5.4",
-    "ext-redis": "*",
     "aloframework/log": "^1.0 || ^2.0",
     "aloframework/config": "^1.0.1",
     "aloframework/cache": "^0.1"
