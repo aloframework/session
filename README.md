@@ -1,1 +1,1 @@
-A caching component in building
+A session component in building
