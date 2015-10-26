@@ -1,0 +1,42 @@
+{
+  "name": "aloframework/session",
+  "description": "Common elements of AloFramework",
+  "prefer-stable": true,
+  "type": "library",
+  "license": "GPL-3.0+",
+  "homepage": "https://github.com/aloframework/session",
+  "keywords": [
+    "PHP",
+    "5.4",
+    "AloFramework",
+    "cache",
+    "redis"
+  ],
+  "authors": [
+    {
+      "name": "Art",
+      "email": "a.molcanovas@gmail.com",
+      "role": "Developer",
+      "homepage": "https://github.com/Alorel"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/aloframework/session/issues"
+  },
+  "require": {
+    "php": ">=5.4",
+    "ext-redis": "*",
+    "aloframework/log": "^1.0 || ^2.0",
+    "aloframework/config": "^1.0.1",
+    "aloframework/cache": "^0.1"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^2.7",
+    "aloframework/handlers": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "AloFramework\\Session\\": "src"
+    }
+  }
+}
