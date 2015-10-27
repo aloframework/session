@@ -17,6 +17,7 @@
      *           must not set any session values using this key.
      * @property string $prefix           How to prefix session keys if using cache engine-based handlers
      * @property bool   $secure           If set to true the session cookie will only be sent via HTTPS connections
+     * @property string $sessionAlgo      Session ID generator hash algorithm
      */
     class Config extends AbstractConfig {
 
@@ -59,6 +60,12 @@
         const CFG_SECURE = 'secure';
 
         /**
+         * Session ID generator hash algorithm
+         * @var string
+         */
+        const CFG_SESSION_ID_ALGO = 'sessionAlgo';
+
+        /**
          * Default settings array
          * @var array
          */
@@ -86,6 +93,7 @@
                                    self::CFG_COOKIE_NAME       => 'AloSession',
                                    self::CFG_FINGERPRINT_NAME  => '_fp_',
                                    self::CFG_PREFIX            => '_alo_sess_',
+                                   self::CFG_SESSION_ID_ALGO => 'sha512',
                                    self::CFG_SECURE            => true];
             }
         }
