@@ -3,18 +3,19 @@
     namespace AloFramework\Session;
 
     use AloFramework\Session\SessionException as SEx;
+    use PDO;
+    use PDOException;
     use Psr\Log\LoggerInterface;
-    use Redis;
 
     /**
-     * Redis-based session handler
+     * MySQL-based session handler
      * @author Art <a.molcanovas@gmail.com>
      */
-    class RedisSession extends AbstractSession {
+    class MySQLSession extends AbstractSession {
 
         /**
-         * The Redis client
-         * @var Redis
+         * The PDO instance
+         * @var PDO
          */
         protected $client;
 
@@ -22,25 +23,12 @@
          * Constructor
          * @author Art <a.molcanovas@gmail.com>
          *
-         * @param Redis $redis            The Redis instance with an active connection. If omitted, a new one will be
-         *                                created and an attempt to connect to localhost with default settings will
-         *                                be made.
+         * @param PDO             $pdo    PDO instance to use
          * @param Config          $cfg    Your custom configuration
          * @param LoggerInterface $logger A logger object. If omitted, AloFramework\Log will be used.
-         *
-         * @throws SEx When $redis isn't supplied and we're unable to connect to localhost.
          */
-        function __construct(Redis $redis = null, Config $cfg = null, LoggerInterface $logger = null) {
-            //@codeCoverageIgnoreStart
-            if (!$redis) {
-                $redis = new Redis();
-                if (!$redis->connect('127.0.0.1')) {
-                    throw new SEx('Unable to connect to Redis @ 127.0.0.1');
-                }
-            }
-            //@codeCoverageIgnoreEnd
-
-            $this->client = $redis;
+        function __construct(PDO $pdo, Config $cfg = null, LoggerInterface $logger = null) {
+            $this->client = $pdo;
 
             //Parent constructor must be called after $this->client is set
             parent::__construct($cfg, $logger);
@@ -58,9 +46,16 @@
          */
         function destroy($sessionID) {
             parent::destroy($sessionID);
-            $this->client->delete($this->config->prefix . $sessionID);
+            try {
+                $sql  = $this->client->prepare('DELETE FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 1');
+                $exec = $sql->execute([$sessionID]);
 
-            return true;
+                return $exec;
+            } catch (PDOException $e) {
+                $this->log->error('Failed to remove session ' . $sessionID . ' from database: ' . $e->getMessage());
+
+                return false;
+            }
         }
 
         /**
@@ -70,9 +65,31 @@
          * @param string $sessionID The session ID
          *
          * @return bool
+         * @throws SEx On PDOException or general query failure
          */
         protected function idExists($sessionID) {
-            return $this->client->exists($sessionID);
+            try {
+                $sql =
+                    $this->client->prepare('SELECT COUNT(*) FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 0');
+                $sql->execute();
+
+                if (!$sql->execute()) {
+                    throw new SEx('Failed to check if the session ID ' . $sessionID .
+                                  ' exists: $sql->execute() returned ' . 'false', Sex::E_SECURITY_ERROR);
+                } else {
+                    $exec = $sql->fetchAll(PDO::FETCH_COLUMN, 0);
+
+                    if (!empty($exec)) {
+                        return $exec[0] != 0;
+                    }
+                }
+            } catch (PDOException $e) {
+                throw new SEx('Failed to check if the session ID ' . $sessionID . ' exists: ' . $e->getMessage(),
+                              SEx::E_PDO_FORWARD,
+                              $e);
+            }
+
+            return true;
         }
 
         /**
@@ -86,9 +103,23 @@
          *                string. Note this value is returned internally to PHP for processing.
          */
         function read($sessionID) {
-            $get = $this->client->get($this->config->prefix . $sessionID);
+            try {
+                $sql = $this->client->prepare('SELECT `data` FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 1');
 
-            return is_string($get) ? $get : '';
+                if ($sql->execute([$sessionID])) {
+                    $exec = $sql->fetchAll(PDO::FETCH_COLUMN, 0);
+
+                    if (!empty($exec)) {
+                        return $exec[0];
+                    }
+                }
+            } catch (PDOException $e) {
+                $this->log->error('Error while fetching session data for ' . $sessionID . ': ' . $e->getMessage());
+
+                return '';
+            }
+
+            return '';
         }
 
         /**
@@ -105,7 +136,16 @@
          *              internally to PHP for processing.
          */
         function write($sessionID, $sessionData) {
-            return $this->client->setex($this->config->prefix . $sessionID, $this->config->timeout, $sessionData);
+            try {
+                $sql  = $this->client->prepare('REPLACE INTO `' . $this->config->table . '`(`id`,`data`) VALUES(?,?)');
+                $exec = $sql->execute([$sessionID, $sessionData]);
+
+                return $exec;
+            } catch (PDOException $e) {
+                $this->log->error('Failed to write session data for ' . $sessionID . ': ' . $e->getMessage());
+
+                return false;
+            }
         }
 
     }

@@ -15,6 +15,7 @@
      * @property string $prefix           How to prefix session keys if using cache engine-based handlers
      * @property bool   $secure           If set to true the session cookie will only be sent via HTTPS connections
      * @property string $sessionAlgo      Session ID generator hash algorithm
+     * @property string $table            Which table to use if using SQL-based handlers
      */
     class Config extends AbstractConfig {
 
@@ -56,6 +57,12 @@
         const CFG_SESSION_ID_ALGO = 'sessionAlgo';
 
         /**
+         * Table to use if using SQL-based handlers
+         * @var string
+         */
+        const CFG_TABLE = 'table';
+
+        /**
          * Default settings array
          * @var array
          */
@@ -83,6 +90,7 @@
                                    self::CFG_FINGERPRINT_NAME => '_fp_',
                                    self::CFG_PREFIX           => '_alo_sess_',
                                    self::CFG_SESSION_ID_ALGO  => 'sha512',
+                                   self::CFG_TABLE => 'alo_session',
                                    self::CFG_SECURE           => true];
             }
         }

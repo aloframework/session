@@ -41,19 +41,34 @@
          * Sets the session ID variable & the cookie
          *
          * @author Art <a.molcanovas@gmail.com>
-         * @return self
+         * @return string The generated ID
          */
-        private function setID() {
-            $c   = Alo::nullget($_COOKIE[$this->config->cookie]);
-            $sid = $c && strlen($c) == strlen(hash($this->config->sessionAlgo, 1)) ? $c :
-                Alo::getUniqid($this->config->sessionAlgo, 'session' . Alo::getFingerprint('md5'));
+        protected function setID() {
+            $c = Alo::nullget($_COOKIE[$this->config->cookie]);
+            if ($c && strlen($c) == strlen(hash($this->config->sessionAlgo, 1))) {
+                $sid = $c;
+            } else {
+                do {
+                    $sid = Alo::getUniqid($this->config->sessionAlgo, 'session' . Alo::getFingerprint('md5'));
+                } while ($this->idExists($sid));
+            }
 
             session_id($sid);
 
             $this->log->debug('Session ID set to ' . $sid);
 
-            return $this;
+            return $sid;
         }
+
+        /**
+         * Check if the given session ID exists
+         * @author Art <a.molcanovas@gmail.com>
+         *
+         * @param string $sessionID The session ID
+         *
+         * @return bool
+         */
+        protected abstract function idExists($sessionID);
 
         /**
          * Only calls session_destroy() if a session is active

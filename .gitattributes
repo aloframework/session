@@ -9,3 +9,4 @@
 /CHANGELOG.md export-ignore
 /apigen.neon export-ignore
 /coverage export-ignore
+/setup export-ignore

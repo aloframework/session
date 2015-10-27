@@ -6,12 +6,18 @@ php:
   - 5.4
   - 7.0
   - nightly
+env:
+ - DB=mysql
+
+services:
+ - redis-server
 
 before_script:
  - composer self-update
  - phpenv config-add phpunit.cnf.ini
  - composer update --no-dev
  - composer require satooshi/php-coveralls
+ - mysql -e 'create database phpunit;'
 
 script:
  - mkdir -p build/logs
