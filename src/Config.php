@@ -8,9 +8,6 @@
      * Configuration class
      * @author Art <a.molcanovas@gmail.com>
      *
-     * @property int    $cleanupFrequency Probability of a session cleanup to be called on request. Entering 100 would
-     *                                 mean
-     *                                 that there is a 1/100 chance.
      * @property int    $timeout          Session timeout
      * @property string $cookie           Session cookie name
      * @property string $fingerprint      Session fingerprint name. This is used to prevent session hijacking and you
@@ -20,13 +17,6 @@
      * @property string $sessionAlgo      Session ID generator hash algorithm
      */
     class Config extends AbstractConfig {
-
-        /**
-         * Probability of a session cleanup to be called on request. Entering 100
-         * would mean that there is a 1/100 chance.
-         * @var string
-         */
-        const CFG_CLEANUP_FREQUENCY = 'cleanupFrequency';
 
         /**
          * Session timeout
@@ -88,13 +78,12 @@
          */
         private static function setDefaultConfig() {
             if (!self::$defaults) {
-                self::$defaults = [self::CFG_CLEANUP_FREQUENCY => 100,
-                                   self::CFG_TIMEOUT           => 300,
-                                   self::CFG_COOKIE_NAME       => 'AloSession',
-                                   self::CFG_FINGERPRINT_NAME  => '_fp_',
-                                   self::CFG_PREFIX            => '_alo_sess_',
-                                   self::CFG_SESSION_ID_ALGO => 'sha512',
-                                   self::CFG_SECURE            => true];
+                self::$defaults = [self::CFG_TIMEOUT          => 300,
+                                   self::CFG_COOKIE_NAME      => 'AloSession',
+                                   self::CFG_FINGERPRINT_NAME => '_fp_',
+                                   self::CFG_PREFIX           => '_alo_sess_',
+                                   self::CFG_SESSION_ID_ALGO  => 'sha512',
+                                   self::CFG_SECURE           => true];
             }
         }
     }

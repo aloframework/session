@@ -12,16 +12,11 @@
     /**
      * Abstract session operations
      * @author Art <a.molcanovas@gmail.com>
+     * @property Config $config
      */
     abstract class AbstractSession implements SessionHandlerInterface, Configurable {
 
         use ConfigurableTrait;
-
-        /**
-         * The configuration holder
-         * @var Config
-         */
-        protected $config;
 
         /**
          * Logger instance
@@ -51,7 +46,7 @@
         private function setID() {
             $c   = Alo::nullget($_COOKIE[$this->config->cookie]);
             $sid = $c && strlen($c) == strlen(hash($this->config->sessionAlgo, 1)) ? $c :
-                Alo::getUniqid($this->config->sessionAlgo, 'session');
+                Alo::getUniqid($this->config->sessionAlgo, 'session' . Alo::getFingerprint('md5'));
 
             session_id($sid);
 
@@ -90,7 +85,7 @@
          * @author Art <a.molcanovas@gmail.com>
          * @return self
          */
-        function init() {
+        function start() {
             if (!self::isActive()) {
                 session_set_cookie_params($this->config->timeout, '/', null, $this->config->secure, true);
                 session_name($this->config->cookie);
@@ -111,19 +106,17 @@
          * @author Art <a.molcanovas@gmail.com>
          * @return boolean TRUE if the check has passed, FALSE if not and the session has been terminated.
          */
-        protected function identityCheck() {
-            $token = self::getToken();
-            $sid   = session_id();
+        private function identityCheck() {
+            $fingerprint = self::getFingerprint();
 
             if (!Alo::nullget($_SESSION[$this->config->fingerprint])) {
-                $_SESSION[$this->config->fingerprint] = $token;
-            } elseif ($token !== $_SESSION[$this->config->fingerprint]) {
-                $this->log->notice('Session identity check failed for session ID ' . $sid);
-                $this->destroy($sid);
+                $_SESSION[$this->config->fingerprint] = $fingerprint;
+            } elseif ($fingerprint !== $_SESSION[$this->config->fingerprint]) {
+                $this->handleIdentityCheckFailure(session_id());
 
                 return false;
             }
-            $this->log->debug('Identity check passed for session ID ' . $sid);
+            $this->log->debug('Identity check passed for session ID ' . session_id());
 
             return true;
         }
@@ -134,8 +127,19 @@
          * @author Art <a.molcanovas@gmail.com>
          * @return string
          */
-        private static function getToken() {
+        private static function getFingerprint() {
             return md5('AloSession' . Alo::getFingerprint('md5'));
+        }
+
+        /**
+         * What to do when an identity check fails
+         * @author Art <a.molcanovas@gmail.com>
+         *
+         * @param string $sessionID The session ID that failed
+         */
+        protected function handleIdentityCheckFailure($sessionID) {
+            $this->log->notice('Session identity check failed for session ID ' . $sessionID);
+            $this->destroy($sessionID);
         }
 
         /**
@@ -153,6 +157,21 @@
         }
 
         /**
+         * Cleanup old sessions.
+         * @author Art <a.molcanovas@gmail.com>
+         * @link   http://php.net/manual/en/sessionhandlerinterface.gc.php
+         *
+         * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
+         *
+         * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
+         * internally to PHP for processing.
+         * @codeCoverageIgnore
+         */
+        function gc($maxlifetime) {
+            return true;
+        }
+
+        /**
          * Initialize session
          * @author Art <a.molcanovas@gmail.com>
          * @link   http://php.net/manual/en/sessionhandlerinterface.open.php
@@ -162,6 +181,7 @@
          *
          * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
          *              internally to PHP for processing.
+         * @codeCoverageIgnore
          */
         function open($savePath, $sessionID) {
             return true;
@@ -173,6 +193,7 @@
          * @link   http://php.net/manual/en/sessionhandlerinterface.close.php
          * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
          *              internally to PHP for processing.
+         * @codeCoverageIgnore
          */
         function close() {
             return true;

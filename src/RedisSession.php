@@ -2,7 +2,7 @@
 
     namespace AloFramework\Session;
 
-    use AloFramework\Common\Alo;
+    use AloFramework\Session\SessionException as SEx;
     use Psr\Log\LoggerInterface;
     use Redis;
 
@@ -22,13 +22,27 @@
          * Constructor
          * @author Art <a.molcanovas@gmail.com>
          *
-         * @param Redis $redis The Redis instance. If omitted, a new one will be created.
+         * @param Redis $redis            The Redis instance with an active connection. If omitted, a new one will be
+         *                                created and an attempt to connect to localhost with default settings will
+         *                                be made.
          * @param Config          $cfg    Your custom configuration
          * @param LoggerInterface $logger A logger object. If omitted, AloFramework\Log will be used.
+         *
+         * @throws SEx When $redis isn't supplied and we're unable to connect to localhost.
          */
         function __construct(Redis $redis = null, Config $cfg = null, LoggerInterface $logger = null) {
             parent::__construct($cfg, $logger);
-            $this->client = Alo::ifnull($redis, new Redis());
+
+            //@codeCoverageIgnoreStart
+            if (!$redis) {
+                $redis = new Redis();
+                if (!$redis->connect('127.0.0.1')) {
+                    throw new SEx('Unable to connect to Redis @ 127.0.0.1');
+                }
+            }
+            //@codeCoverageIgnoreEnd
+
+            $this->client = $redis;
         }
 
         /**
@@ -43,21 +57,8 @@
          */
         function destroy($sessionID) {
             parent::destroy($sessionID);
+            $this->client->delete($this->config->prefix . $sessionID);
 
-            return $this->client->delete($this->config->prefix . $sessionID);
-        }
-
-        /**
-         * Cleanup old sessions. Not required for Redis sessions as the timeout manages this function.
-         * @author Art <a.molcanovas@gmail.com>
-         * @link   http://php.net/manual/en/sessionhandlerinterface.gc.php
-         *
-         * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
-         *
-         * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
-         * internally to PHP for processing.
-         */
-        function gc($maxlifetime) {
             return true;
         }
 
@@ -72,7 +73,9 @@
          *                string. Note this value is returned internally to PHP for processing.
          */
         function read($sessionID) {
-            return Alo::ifnull($this->client->get($this->config->prefix . $sessionID), '', true);
+            $get = $this->client->get($this->config->prefix . $sessionID);
+
+            return is_string($get) ? $get : '';
         }
 
         /**
