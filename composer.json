@@ -1,6 +1,6 @@
 {
   "name": "aloframework/session",
-  "description": "Session manager of AloFramework",
+  "description": "Redis or MySQL-based session management",
   "prefer-stable": true,
   "type": "library",
   "license": "GPL-3.0+",
@@ -9,8 +9,9 @@
     "PHP",
     "5.4",
     "AloFramework",
-    "cache",
-    "redis"
+    "session",
+    "redis",
+    "mysql"
   ],
   "authors": [
     {
