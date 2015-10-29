@@ -16,6 +16,16 @@
             $this->client = new PDO('mysql:dbname=phpunit;host=localhost;charset=utf8mb4;port=3306', 'root', '');
             $this->client->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->client->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $this->client->query('CREATE TABLE IF NOT EXISTS `alo_session` (
+                                  `id`     CHAR(128)
+                                           CHARACTER SET ascii NOT NULL,
+                                  `data`   TEXT                NOT NULL,
+                                  `access` TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                  PRIMARY KEY (`id`),
+                                  KEY `access` (`access`)
+                                )
+                                  ENGINE = InnoDB
+                                  DEFAULT CHARSET = utf8mb4;')->execute();
         }
 
         function testRW() {
