@@ -5,10 +5,12 @@
     use AloFramework\Session\MySQLSession as Sess;
     use PDO;
 
+    require_once 'AbstractSessionTest.php';
+
     class MySQLTest extends AbstractSessionTest {
 
         /** @var PDO */
-        private $client;
+        protected $client;
 
         function __construct($name = null, array $data = [], $dataName = '') {
             parent::__construct($name, $data, $dataName);

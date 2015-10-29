@@ -24,7 +24,7 @@
             $table       = $this->config->table;
 
             return $this->client->prepare('DELETE FROM `' . $table . '` WHERE DATE_ADD(`access`, INTERVAL ' .
-                                          $maxLifeTime . ' SECOND) >= NOW()')->execute();
+                                          $maxLifeTime . ' SECOND) < NOW()')->execute();
         }
 
         /**

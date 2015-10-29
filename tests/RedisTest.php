@@ -4,6 +4,8 @@
 
     use AloFramework\Session\RedisSession as Sess;
 
+    require_once 'AbstractSessionTest.php';
+
     class RedisTest extends AbstractSessionTest {
 
         /** @var \Redis */
