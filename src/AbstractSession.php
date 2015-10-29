@@ -104,6 +104,7 @@
          * @return self
          */
         function start() {
+            $this->log->debug('Starting session with ' . __CLASS__);
             if (self::isActive()) {
                 //Can't test this via PHPUnit
                 //@codeCoverageIgnoreStart
@@ -180,6 +181,8 @@
          * internally to PHP for processing.
          */
         function destroy($sessionID) {
+            $this->log->info('Destroyed session ' . $sessionID);
+
             return setcookie($this->config->cookie, '', time() - 3, null, null, $this->config->secure, true);
         }
 

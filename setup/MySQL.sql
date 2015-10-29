@@ -1,3 +1,4 @@
+-- Create the session table
 DROP TABLE IF EXISTS `alo_session`;
 CREATE TABLE `alo_session` (
   `id`     CHAR(128)
@@ -10,6 +11,7 @@ CREATE TABLE `alo_session` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
+-- Create the garbage collection event
 DROP EVENT IF EXISTS `clean_alo_session`;
 DELIMITER $$
 CREATE EVENT `clean_alo_session`

@@ -16,6 +16,8 @@
      * @property bool   $secure           If set to true the session cookie will only be sent via HTTPS connections
      * @property string $sessionAlgo      Session ID generator hash algorithm
      * @property string $table            Which table to use if using SQL-based handlers
+     * @property int    $gc               Garbage collection probability. If set to 100 (default) there is a 1/100
+     *           (i.e. 1% chance) that a garbage collection event will occur on session start.
      */
     class Config extends AbstractConfig {
 
@@ -63,6 +65,13 @@
         const CFG_TABLE = 'table';
 
         /**
+         * Garbage collection probability. If set to 100 (default) there is a 1/100 (i.e. 1% chance) that a garbage
+         * collection event will occur on session start.
+         * @var string
+         */
+        const CFG_GC = 'gc';
+
+        /**
          * Default settings array
          * @var array
          */
@@ -90,8 +99,9 @@
                                    self::CFG_FINGERPRINT_NAME => '_fp_',
                                    self::CFG_PREFIX           => '_alo_sess_',
                                    self::CFG_SESSION_ID_ALGO  => 'sha512',
-                                   self::CFG_TABLE => 'alo_session',
-                                   self::CFG_SECURE           => true];
+                                   self::CFG_TABLE            => 'alo_session',
+                                   self::CFG_SECURE           => true,
+                                   self::CFG_GC               => 100];
             }
         }
     }
