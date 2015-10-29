@@ -85,6 +85,7 @@
 			<ul>
 				<li><a href="class-AloFramework.Session.AbstractSession.html">AbstractSession</a></li>
 				<li class="active"><a href="class-AloFramework.Session.Config.html">Config</a></li>
+				<li><a href="class-AloFramework.Session.MySQLNoEventSession.html">MySQLNoEventSession</a></li>
 				<li><a href="class-AloFramework.Session.MySQLSession.html">MySQLSession</a></li>
 				<li><a href="class-AloFramework.Session.RedisSession.html">RedisSession</a></li>
 			</ul>
@@ -364,6 +365,31 @@ values using this key.</p>
 					</div>
 				</td>
 			</tr>
+			<tr data-order="CFG_GC" id="CFG_GC">
+
+				<td class="attributes"><code>string</code></td>
+				<td class="name">
+					<code>
+<b>CFG_GC</b>					</code>
+
+					<div class="description short">
+						<p>Garbage collection probability. If set to 100 (default) there is a 1/100 (i.e. 1% chance) that a garbage
+collection event will occur on session start.</p>
+					</div>
+
+					<div class="description detailed hidden">
+						<p>Garbage collection probability. If set to 100 (default) there is a 1/100 (i.e. 1% chance) that a garbage
+collection event will occur on session start.</p>
+
+					</div>
+				</td>
+				<td class="value">
+					<div>
+						<a href="#CFG_GC" class="anchor">#</a>
+						<code><span class="php-quote">'gc'</span></code>
+					</div>
+				</td>
+			</tr>
 			</table>
 		</div>
 
@@ -497,6 +523,24 @@ values using this key.</p>
 <var>$table</var>
 				<div class="description short">
 					<p>Which table to use if using SQL-based handlers</p>
+				</div>
+
+				<div class="description detailed hidden">
+					
+
+				</div>
+			</td>
+		</tr>
+		<tr data-order="gc" id="m$gc">
+			<td class="attributes"><code>
+				public  
+				integer
+			</code></td>
+
+			<td class="name">
+<var>$gc</var>
+				<div class="description short">
+					<p>Garbage collection probability. If set to 100 (default) there is a 1/100           (i.e. 1% chance) that a garbage collection event will occur on session start.</p>
 				</div>
 
 				<div class="description detailed hidden">

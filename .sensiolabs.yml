@@ -3,3 +3,6 @@ exclude_patterns:
  - tests/*
  - vendor/*
  - phpunit.*
+rules:
+ php.dynamically_change_configuration:
+  enabled: false
