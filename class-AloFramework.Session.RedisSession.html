@@ -1,565 +1,491 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    <title>Class AloFramework\Session\RedisSession | AloFramework Sessions 1.0 API</title>
+	<title>Class AloFramework\Session\RedisSession | AloFramework Sessions 1.0 API</title>
 
-    <link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
-    <link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
 
 </head>
 
 <body>
-<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a href="index.html" class="navbar-brand">AloFramework Sessions 1.0 API</a>
-        </div>
-        <div class="collapse navbar-collapse">
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">AloFramework Sessions 1.0 API</a>
+			</div>
+			<div class="collapse navbar-collapse">
 
-            <form id="search" class="navbar-form navbar-left" role="search">
-                <input type="hidden" name="cx" value="">
-                <input type="hidden" name="ie" value="UTF-8">
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
 
-                <div class="form-group">
-                    <input type="text" name="q" class="search-query form-control" placeholder="Search">
-                </div>
-            </form>
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-AloFramework.Session.html" title="Summary of AloFramework\Session"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
 
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="namespace-AloFramework.Session.html" title="Summary of AloFramework\Session"><span>Namespace</span></a>
-                </li>
-                <li class="active">
-                    <span>Class</span></li>
+					<li class="divider-vertical"></li>
 
-                <li class="divider-vertical"></li>
+					<li>
+						<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+					</li>
 
-                <li>
-                    <a href="tree.html"
-                       title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-                </li>
-
-                <li>
-                    <a href="annotation-group-deprecated.html" title="List of elements with deprecated annotation">
-                        <span>Deprecated</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="annotation-group-todo.html" title="List of elements with todo annotation">
-                        <span>Todo</span>
-                    </a>
-                </li>
+						<li>
+							<a href="annotation-group-deprecated.html" title="List of elements with deprecated annotation">
+								<span>Deprecated</span>
+							</a>
+						</li>
+						<li>
+							<a href="annotation-group-todo.html" title="List of elements with todo annotation">
+								<span>Todo</span>
+							</a>
+						</li>
 
 
-            </ul>
-        </div>
-    </div>
-</nav>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-<div id="left">
-    <div id="menu">
+	<div id="left">
+	<div id="menu">
 
-        <div id="groups">
-            <h3>Namespaces</h3>
-            <ul>
-                <li class="active">
-                    <a href="namespace-AloFramework.html">
-                        AloFramework<span></span>
-                    </a>
-                    <ul>
-                        <li class="active">
-                            <a href="namespace-AloFramework.Session.html">
-                                Session </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="namespace-PHP.html">
-                        PHP </a>
-                </li>
-            </ul>
-        </div>
-
-
-        <div id="elements">
-            <h3>Classes</h3>
-            <ul>
-                <li><a href="class-AloFramework.Session.AbstractSession.html">AbstractSession</a></li>
-                <li><a href="class-AloFramework.Session.Config.html">Config</a></li>
-                <li><a href="class-AloFramework.Session.MySQLSession.html">MySQLSession</a></li>
-                <li class="active"><a href="class-AloFramework.Session.RedisSession.html">RedisSession</a></li>
-            </ul>
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-AloFramework.html">
+							AloFramework<span></span>
+						</a>
+							<ul>
+					<li class="active">
+						<a href="namespace-AloFramework.Session.html">
+							Session						</a>
+							</li>
+								</ul></li>
+					<li>
+						<a href="namespace-PHP.html">
+							PHP						</a>
+							</li>
+			</ul>
+		</div>
 
 
-            <h3>Exceptions</h3>
-            <ul>
-                <li><a href="class-AloFramework.Session.SessionException.html">SessionException</a></li>
-            </ul>
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-AloFramework.Session.AbstractSession.html">AbstractSession</a></li>
+				<li><a href="class-AloFramework.Session.Config.html">Config</a></li>
+				<li><a href="class-AloFramework.Session.MySQLNoEventSession.html">MySQLNoEventSession</a></li>
+				<li><a href="class-AloFramework.Session.MySQLSession.html">MySQLSession</a></li>
+				<li class="active"><a href="class-AloFramework.Session.RedisSession.html">RedisSession</a></li>
+			</ul>
 
 
-        </div>
-    </div>
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-AloFramework.Session.SessionException.html">SessionException</a></li>
+			</ul>
+
+
+		</div>
+	</div>
 </div>
 
 <div id="splitter"></div>
 
 <div id="right">
-    <div id="rightInner">
-        <div id="content" class="class">
-            <h1>Class RedisSession</h1>
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class RedisSession</h1>
 
 
-            <div class="description">
-                <p>Redis-based session handler</p>
-            </div>
+	<div class="description">
+	<p>Redis-based session handler</p>
+	</div>
 
-            <dl class="tree well">
-                <dd style="padding-left:0px">
-                    <a href="class-AloFramework.Session.AbstractSession.html"><span>AloFramework\Session\AbstractSession</span></a>
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+			<a href="class-AloFramework.Session.AbstractSession.html"><span>AloFramework\Session\AbstractSession</span></a>
+			
+			 implements 
+				<a href="class-SessionHandlerInterface.html"><span>SessionHandlerInterface</span></a>, 
+			
+<span>AloFramework\Config\Configurable</span>, 
+			
+				<a href="class-ArrayAccess.html"><span>ArrayAccess</span></a>
+			
+			 uses 
+					AloFramework\Config\ConfigurableTrait (not available)
+
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>AloFramework\Session\RedisSession</span></b>			
+			
+			
+		</dd>
+	</dl>
 
-                    implements
-                    <a href="class-SessionHandlerInterface.html"><span>SessionHandlerInterface</span></a>,
 
-                    <span>AloFramework\Config\Configurable</span>,
 
-                    <a href="class-ArrayAccess.html"><span>ArrayAccess</span></a>
 
-                    uses
-                    AloFramework\Config\ConfigurableTrait (not available)
 
+
+
 
-                </dd>
-                <dd style="padding-left:30px">
-                    <img src="resources/inherit.png" alt="Extended by">
-                    <b><span>AloFramework\Session\RedisSession</span></b>
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-AloFramework.html">AloFramework</a>\<a href="namespace-AloFramework.Session.html">Session</a><br>
+		
+
+				<b>Author:</b>
+				Art <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
+			<b>Located at</b> RedisSession.php		<br>
+	</div>
+
+
 
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="__construct" id="___construct">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___construct">#</a>
+			<code>__construct( <span><code><a href="class-Redis.html">Redis</a></code> <var>$redis</var> = <span class="php-keyword1">null</span></span>, <span><code><a href="class-AloFramework.Session.Config.html">AloFramework\Session\Config</a></code> <var>$cfg</var> = <span class="php-keyword1">null</span></span>, <span>Psr\Log\LoggerInterface <var>$logger</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Constructor</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Constructor</p>
+
 
-                </dd>
-            </dl>
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$redis</var></dt>
+						<dd><p>The Redis instance with an active connection. If omitted, a new one will be
+                               created and an attempt to connect to localhost with default settings will
+                               be made.</p></dd>
+						<dt><var>$cfg</var></dt>
+						<dd>Your custom configuration</dd>
+						<dt><var>$logger</var></dt>
+						<dd>A logger object. If omitted, AloFramework\Log will be used.</dd>
+					</dl></div>
 
+
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-AloFramework.Session.SessionException.html">AloFramework\Session\SessionException</a></code><br>When $redis isn't supplied and we're unable to connect to localhost.
+					</div>
 
-            <div class="alert alert-info">
+					<h4>Author</h4>
+					<div class="list">
+							Art <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
+					</div>
 
-
-                <b>Namespace:</b> <a href="namespace-AloFramework.html">AloFramework</a>\<a
-                    href="namespace-AloFramework.Session.html">Session</a><br>
-
-
-                <b>Author:</b>
-                Art <a
-                    href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-                &#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
-                <b>Located at</b> RedisSession.php <br>
-            </div>
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><h2>Methods summary</h2></div>
-                <table class="summary table table-bordered table-striped methods" id="methods">
-                    <tr data-order="__construct" id="___construct">
-
-                        <td class="attributes"><code>
-                            public
-
-
-                        </code>
-                        </td>
-
-                        <td class="name">
-                            <div>
-                                <a class="anchor" href="#___construct">#</a>
-                                <code>__construct( <span><code><a
-                                        href="class-Redis.html">Redis</a></code> <var>$redis</var> = <span
-                                        class="php-keyword1">null</span></span>, <span><code><a
-                                        href="class-AloFramework.Session.Config.html">AloFramework\Session\Config</a></code> <var>$cfg</var> = <span
-                                        class="php-keyword1">null</span></span>, <span>Psr\Log\LoggerInterface <var>$logger</var> = <span
-                                        class="php-keyword1">null</span></span> )</code>
-
-                                <div class="description short">
-                                    <p>Constructor</p>
-                                </div>
-
-                                <div class="description detailed hidden">
-                                    <p>Constructor</p>
-
-
-                                    <h4>Parameters</h4>
-
-                                    <div class="list">
-                                        <dl>
-                                            <dt><var>$redis</var></dt>
-                                            <dd><p>The Redis instance with an active connection. If omitted, a new one
-                                                will be
-                                                created and an attempt to connect to localhost with default settings
-                                                will
-                                                be made.</p></dd>
-                                            <dt><var>$cfg</var></dt>
-                                            <dd>Your custom configuration</dd>
-                                            <dt><var>$logger</var></dt>
-                                            <dd>A logger object. If omitted, AloFramework\Log will be used.</dd>
-                                        </dl>
-                                    </div>
-
-
-                                    <h4>Throws</h4>
-
-                                    <div class="list">
-                                        <code><a href="class-AloFramework.Session.SessionException.html">AloFramework\Session\SessionException</a></code><br>When
-                                        $redis isn't supplied and we're unable to connect to localhost.
-                                    </div>
-
-                                    <h4>Author</h4>
-
-                                    <div class="list">
-                                        Art <a
-                                            href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-                                        &#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
-                                    </div>
-
-                                    <h4>Overrides</h4>
-
-                                    <div class="list"><code><a
-                                            href="class-AloFramework.Session.AbstractSession.html#___construct">AloFramework\Session\AbstractSession::__construct</a></code>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr data-order="destroy" id="_destroy">
-
-                        <td class="attributes"><code>
-                            public
-                            boolean
-
-                        </code>
-                        </td>
-
-                        <td class="name">
-                            <div>
-                                <a class="anchor" href="#_destroy">#</a>
-                                <code>destroy( <span>string <var>$sessionID</var></span> )</code>
-
-                                <div class="description short">
-                                    <p>Destroy a session</p>
-                                </div>
-
-                                <div class="description detailed hidden">
-                                    <p>Destroy a session</p>
-
-
-                                    <h4>Parameters</h4>
-
-                                    <div class="list">
-                                        <dl>
-                                            <dt><var>$sessionID</var></dt>
-                                            <dd>The session ID being destroyed.</dd>
-                                        </dl>
-                                    </div>
-
-                                    <h4>Returns</h4>
-
-                                    <div class="list">
-                                        boolean<br>
-
-                                        <p>The return value (usually TRUE on success, FALSE on failure). Note this value
-                                            is returned
-                                            internally to PHP for processing.</p>
-                                    </div>
-
-
-                                    <h4>Author</h4>
-
-                                    <div class="list">
-                                        Art <a
-                                            href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-                                        &#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
-                                    </div>
-                                    <h4>Link</h4>
-
-                                    <div class="list">
-                                        <a href="http://php.net/manual/en/sessionhandlerinterface.destroy.php">http://php.net/manual/en/sessionhandlerinterface.destroy.php</a><br>
-                                    </div>
-
-                                    <h4>Overrides</h4>
-
-                                    <div class="list"><code><a
-                                            href="class-AloFramework.Session.AbstractSession.html#_destroy">AloFramework\Session\AbstractSession::destroy</a></code>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr data-order="idExists" id="_idExists">
-
-                        <td class="attributes"><code>
-                            protected
-                            boolean
-
-                        </code>
-                        </td>
-
-                        <td class="name">
-                            <div>
-                                <a class="anchor" href="#_idExists">#</a>
-                                <code>idExists( <span>string <var>$sessionID</var></span> )</code>
-
-                                <div class="description short">
-                                    <p>Check if the given session ID exists</p>
-                                </div>
-
-                                <div class="description detailed hidden">
-                                    <p>Check if the given session ID exists</p>
-
-
-                                    <h4>Parameters</h4>
-
-                                    <div class="list">
-                                        <dl>
-                                            <dt><var>$sessionID</var></dt>
-                                            <dd>The session ID</dd>
-                                        </dl>
-                                    </div>
-
-                                    <h4>Returns</h4>
-
-                                    <div class="list">
-                                        boolean
-                                    </div>
-
-
-                                    <h4>Author</h4>
-
-                                    <div class="list">
-                                        Art <a
-                                            href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-                                        &#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr data-order="read" id="_read">
-
-                        <td class="attributes"><code>
-                            public
-                            string
-
-                        </code>
-                        </td>
-
-                        <td class="name">
-                            <div>
-                                <a class="anchor" href="#_read">#</a>
-                                <code>read( <span>string <var>$sessionID</var></span> )</code>
-
-                                <div class="description short">
-                                    <p>Read session data</p>
-                                </div>
-
-                                <div class="description detailed hidden">
-                                    <p>Read session data</p>
-
-
-                                    <h4>Parameters</h4>
-
-                                    <div class="list">
-                                        <dl>
-                                            <dt><var>$sessionID</var></dt>
-                                            <dd>The session id to read data for.</dd>
-                                        </dl>
-                                    </div>
-
-                                    <h4>Returns</h4>
-
-                                    <div class="list">
-                                        string<br>
-
-                                        <p>Returns an encoded string of the read data. If nothing was read, it must
-                                            return an empty
-                                            string. Note this value is returned internally to PHP for processing.</p>
-                                    </div>
-
-
-                                    <h4>Author</h4>
-
-                                    <div class="list">
-                                        Art <a
-                                            href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-                                        &#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
-                                    </div>
-                                    <h4>Link</h4>
-
-                                    <div class="list">
-                                        <a href="http://php.net/manual/en/sessionhandlerinterface.read.php">http://php.net/manual/en/sessionhandlerinterface.read.php</a><br>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr data-order="write" id="_write">
-
-                        <td class="attributes"><code>
-                            public
-                            boolean
-
-                        </code>
-                        </td>
-
-                        <td class="name">
-                            <div>
-                                <a class="anchor" href="#_write">#</a>
-                                <code>write( <span>string <var>$sessionID</var></span>,
-                                    <span>string <var>$sessionData</var></span> )</code>
-
-                                <div class="description short">
-                                    <p>Write session data</p>
-                                </div>
-
-                                <div class="description detailed hidden">
-                                    <p>Write session data</p>
-
-
-                                    <h4>Parameters</h4>
-
-                                    <div class="list">
-                                        <dl>
-                                            <dt><var>$sessionID</var></dt>
-                                            <dd>The session id.</dd>
-                                            <dt><var>$sessionData</var></dt>
-                                            <dd><p>The encoded session data. This data is the result of the PHP
-                                                internally
-                                                encoding the $_SESSION superglobal to a serialized string and passing it
-                                                as
-                                                this parameter. Please note sessions use an alternative serialization
-                                                method.</p></dd>
-                                        </dl>
-                                    </div>
-
-                                    <h4>Returns</h4>
-
-                                    <div class="list">
-                                        boolean<br>
-
-                                        <p>The return value (usually TRUE on success, FALSE on failure). Note this value
-                                            is returned
-                                            internally to PHP for processing.</p>
-                                    </div>
-
-
-                                    <h4>Author</h4>
-
-                                    <div class="list">
-                                        Art <a
-                                            href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-                                        &#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
-                                    </div>
-                                    <h4>Link</h4>
-
-                                    <div class="list">
-                                        <a href="http://php.net/manual/en/sessionhandlerinterface.write.php">http://php.net/manual/en/sessionhandlerinterface.write.php</a><br>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3>Methods inherited from <a
-                        href="class-AloFramework.Session.AbstractSession.html#methods">AloFramework\Session\AbstractSession</a>
-                </h3></div>
-                <p class="elementList">
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#___destruct">__destruct()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#___get">__get()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#___set">__set()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_close">close()</a></code>,
-                    <code><a
-                            href="class-AloFramework.Session.AbstractSession.html#_destroySafely">destroySafely()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_gc">gc()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_handleIdentityCheckFailure">handleIdentityCheckFailure()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_isActive">isActive()</a></code>,
-                    <code><a
-                            href="class-AloFramework.Session.AbstractSession.html#_offsetExists">offsetExists()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_offsetGet">offsetGet()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_offsetSet">offsetSet()</a></code>,
-                    <code><a
-                            href="class-AloFramework.Session.AbstractSession.html#_offsetUnset">offsetUnset()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_open">open()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_setID">setID()</a></code>,
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#_start">start()</a></code>
-                </p>
-            </div>
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><h2>Properties summary</h2></div>
-                <table class="summary table table-bordered table-striped properties" id="properties">
-                    <tr data-order="client" id="$client">
-                        <td class="attributes"><code>
-                            protected
-                            <code><a href="class-Redis.html">Redis</a></code>
-                        </code></td>
-
-                        <td class="name">
-                            <var>$client</var>
-
-                            <div class="description short">
-                                <p>The Redis client</p>
-                            </div>
-
-                            <div class="description detailed hidden">
-                                <p>The Redis client</p>
-
-                            </div>
-                        </td>
-                        <td class="value">
-                            <div>
-                                <a href="#$client" class="anchor">#</a>
-                                <code></code>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3>Properties inherited from <a
-                        href="class-AloFramework.Session.AbstractSession.html#properties">AloFramework\Session\AbstractSession</a>
-                </h3></div>
-                <p class="elementList">
-                    <code><a href="class-AloFramework.Session.AbstractSession.html#$log"><var>$log</var></a></code>
-                </p>
-            </div>
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3>Magic properties inherited from <a
-                        href="class-AloFramework.Session.AbstractSession.html#properties">AloFramework\Session\AbstractSession</a>
-                </h3></div>
-                <p class="elementList">
-                    <code><a
-                            href="class-AloFramework.Session.AbstractSession.html#m$config"><var>$config</var></a></code>
-                </p>
-            </div>
-
-
-        </div>
-    </div>
-
-    <div id="footer">
-        AloFramework Sessions 1.0 API API documentation generated by <a href="http://apigen.org">ApiGen</a>
-    </div>
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-AloFramework.Session.AbstractSession.html#___construct">AloFramework\Session\AbstractSession::__construct</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="destroy" id="_destroy">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_destroy">#</a>
+			<code>destroy( <span>string <var>$sessionID</var></span> )</code>
+
+			<div class="description short">
+				<p>Destroy a session</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Destroy a session</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sessionID</var></dt>
+						<dd>The session ID being destroyed.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean<br><p>The return value (usually TRUE on success, FALSE on failure). Note this value is returned
+internally to PHP for processing.</p>
+					</div>
+
+
+					<h4>Author</h4>
+					<div class="list">
+							Art <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
+					</div>
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/manual/en/sessionhandlerinterface.destroy.php">http://php.net/manual/en/sessionhandlerinterface.destroy.php</a><br>
+					</div>
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-AloFramework.Session.AbstractSession.html#_destroy">AloFramework\Session\AbstractSession::destroy</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="idExists" id="_idExists">
+
+			<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_idExists">#</a>
+			<code>idExists( <span>string <var>$sessionID</var></span> )</code>
+
+			<div class="description short">
+				<p>Check if the given session ID exists</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Check if the given session ID exists</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sessionID</var></dt>
+						<dd>The session ID</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+					<h4>Author</h4>
+					<div class="list">
+							Art <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="read" id="_read">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_read">#</a>
+			<code>read( <span>string <var>$sessionID</var></span> )</code>
+
+			<div class="description short">
+				<p>Read session data</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Read session data</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sessionID</var></dt>
+						<dd>The session id to read data for.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						string<br><p>Returns an encoded string of the read data. If nothing was read, it must return an empty
+               string. Note this value is returned internally to PHP for processing.</p>
+					</div>
+
+
+					<h4>Author</h4>
+					<div class="list">
+							Art <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
+					</div>
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/manual/en/sessionhandlerinterface.read.php">http://php.net/manual/en/sessionhandlerinterface.read.php</a><br>
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="write" id="_write">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_write">#</a>
+			<code>write( <span>string <var>$sessionID</var></span>, <span>string <var>$sessionData</var></span> )</code>
+
+			<div class="description short">
+				<p>Write session data</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Write session data</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sessionID</var></dt>
+						<dd>The session id.</dd>
+						<dt><var>$sessionData</var></dt>
+						<dd><p>The encoded session data. This data is the result of the PHP internally
+                            encoding the $_SESSION superglobal to a serialized string and passing it as
+                            this parameter. Please note sessions use an alternative serialization method.</p></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean<br><p>The return value (usually TRUE on success, FALSE on failure). Note this value is returned
+             internally to PHP for processing.</p>
+					</div>
+
+
+					<h4>Author</h4>
+					<div class="list">
+							Art <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
+					</div>
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/manual/en/sessionhandlerinterface.write.php">http://php.net/manual/en/sessionhandlerinterface.write.php</a><br>
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-AloFramework.Session.AbstractSession.html#methods">AloFramework\Session\AbstractSession</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-AloFramework.Session.AbstractSession.html#___destruct">__destruct()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#___get">__get()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#___set">__set()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_close">close()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_destroySafely">destroySafely()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_gc">gc()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_handleIdentityCheckFailure">handleIdentityCheckFailure()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_isActive">isActive()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_offsetExists">offsetExists()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_offsetGet">offsetGet()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_offsetSet">offsetSet()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_offsetUnset">offsetUnset()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_open">open()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_setID">setID()</a></code>, 
+				<code><a href="class-AloFramework.Session.AbstractSession.html#_start">start()</a></code>
+			</p>
+		</div>
+
+
+
+
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="client" id="$client">
+			<td class="attributes"><code>
+				protected  
+				<code><a href="class-Redis.html">Redis</a></code>
+			</code></td>
+
+			<td class="name">
+<var>$client</var>
+				<div class="description short">
+					<p>The Redis client</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>The Redis client</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$client" class="anchor">#</a>
+					<code></code>
+				</div>
+			</td>
+		</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Properties inherited from <a href="class-AloFramework.Session.AbstractSession.html#properties">AloFramework\Session\AbstractSession</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-AloFramework.Session.AbstractSession.html#$log"><var>$log</var></a></code>
+			</p>
+		</div>
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Magic properties inherited from <a href="class-AloFramework.Session.AbstractSession.html#properties">AloFramework\Session\AbstractSession</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-AloFramework.Session.AbstractSession.html#m$config"><var>$config</var></a></code>
+			</p>
+		</div>
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		AloFramework Sessions 1.0 API API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
 </div>
 <script src="resources/combined.js"></script>
 <script src="elementlist.js"></script>
