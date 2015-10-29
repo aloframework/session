@@ -13,7 +13,8 @@
                          Cfg::CFG_FINGERPRINT_NAME => '_fp_',
                          Cfg::CFG_PREFIX           => '_alo_sess_',
                          Cfg::CFG_SESSION_ID_ALGO  => 'sha512',
-                         Cfg::CFG_SECURE           => true];
+                         Cfg::CFG_SECURE           => true,
+                         Cfg::CFG_TABLE            => 'alo_session'];
 
             $this->assertEquals($expected, (new Cfg())->getAll());
         }

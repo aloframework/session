@@ -22,7 +22,7 @@
          * Constructor
          * @author Art <a.molcanovas@gmail.com>
          *
-         * @param Redis $redis            The Redis instance with an active connection. If omitted, a new one will be
+         * @param Redis           $redis  The Redis instance with an active connection. If omitted, a new one will be
          *                                created and an attempt to connect to localhost with default settings will
          *                                be made.
          * @param Config          $cfg    Your custom configuration
@@ -57,10 +57,10 @@
          * internally to PHP for processing.
          */
         function destroy($sessionID) {
-            parent::destroy($sessionID);
+            $parent = parent::destroy($sessionID);
             $this->client->delete($this->config->prefix . $sessionID);
 
-            return true;
+            return $parent;
         }
 
         /**

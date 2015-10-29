@@ -51,11 +51,13 @@
                 $exec = $sql->execute([$sessionID]);
 
                 return $exec;
+                //@codeCoverageIgnoreStart
             } catch (PDOException $e) {
                 $this->log->error('Failed to remove session ' . $sessionID . ' from database: ' . $e->getMessage());
 
                 return false;
             }
+            //@codeCoverageIgnoreEnd
         }
 
         /**
@@ -71,25 +73,24 @@
             try {
                 $sql =
                     $this->client->prepare('SELECT COUNT(*) FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 0');
-                $sql->execute();
 
-                if (!$sql->execute()) {
+                //@codeCoverageIgnoreStart
+                if (!$sql->execute([$sessionID])) {
                     throw new SEx('Failed to check if the session ID ' . $sessionID .
                                   ' exists: $sql->execute() returned ' . 'false', Sex::E_SECURITY_ERROR);
                 } else {
-                    $exec = $sql->fetchAll(PDO::FETCH_COLUMN, 0);
+                    //@codeCoverageIgnoreEnd
+                    $exec = $sql->fetchAll(PDO::FETCH_NUM);
 
-                    if (!empty($exec)) {
-                        return $exec[0] != 0;
-                    }
+                    return empty($exec) ? false : $exec[0] != 0;
                 }
+                //@codeCoverageIgnoreStart
             } catch (PDOException $e) {
                 throw new SEx('Failed to check if the session ID ' . $sessionID . ' exists: ' . $e->getMessage(),
                               SEx::E_PDO_FORWARD,
                               $e);
             }
-
-            return true;
+            //@codeCoverageIgnoreEnd
         }
 
         /**
@@ -109,15 +110,19 @@
                 if ($sql->execute([$sessionID])) {
                     $exec = $sql->fetchAll(PDO::FETCH_COLUMN, 0);
 
+                    //@codeCoverageIgnoreStart
                     if (!empty($exec)) {
                         return $exec[0];
                     }
+                    //@codeCoverageIgnoreEnd
                 }
+                //@codeCoverageIgnoreStart
             } catch (PDOException $e) {
                 $this->log->error('Error while fetching session data for ' . $sessionID . ': ' . $e->getMessage());
 
                 return '';
             }
+            //@codeCoverageIgnoreEnd
 
             return '';
         }
@@ -141,11 +146,13 @@
                 $exec = $sql->execute([$sessionID, $sessionData]);
 
                 return $exec;
+                //@codeCoverageIgnoreStart
             } catch (PDOException $e) {
                 $this->log->error('Failed to write session data for ' . $sessionID . ': ' . $e->getMessage());
 
                 return false;
             }
+            //@codeCoverageIgnoreEns
         }
 
     }
