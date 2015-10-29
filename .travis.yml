@@ -15,7 +15,7 @@ services:
 before_script:
  - composer self-update
  - phpenv config-add phpunit.cnf.ini
- - composer update --no-dev
+ - composer update
  - composer require satooshi/php-coveralls
  - mysql -e 'create database phpunit;'
 
