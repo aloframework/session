@@ -11,13 +11,14 @@ env:
 
 services:
  - redis-server
+ - mysql
 
 before_script:
  - composer self-update
  - phpenv config-add phpunit.cnf.ini
  - composer update
  - composer require satooshi/php-coveralls
- - mysql -e 'create database phpunit;'
+ - mysql -e 'create database if not exists phpunit;'
 
 script:
  - mkdir -p build/logs

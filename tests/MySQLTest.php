@@ -13,7 +13,7 @@
         function __construct($name = null, array $data = [], $dataName = '') {
             parent::__construct($name, $data, $dataName);
 
-            $this->client = new PDO('mysql:dbname=phpunit;host=localhost;charset=utf8mb4;port=3306', 'phpunit', '');
+            $this->client = new PDO('mysql:dbname=phpunit;host=localhost;charset=utf8mb4;port=3306', 'root', '');
             $this->client->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->client->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         }
