@@ -6,7 +6,7 @@
 /.sensiolabs.yml export-ignore
 /.travis.yml export-ignore
 /phpunit.* export-ignore
-/CHANGELOG.md export-ignore
+/CHANGELOG export-ignore
 /apigen.neon export-ignore
 /coverage export-ignore
 /setup export-ignore

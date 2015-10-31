@@ -64,3 +64,4 @@ Configuration is done via the [Configuration class](https://github.com/aloframew
  - `Config::CFG_TABLE` - table to use if using MySQL-based handlers. Defaults to alo_session.
  - `Config::CFG_SECURE` - if set to true, the session cookie will only be sent via HTTPS connections (defaults to `true`).
  - `Config::CFG_GC` - garbage collection probability. If set to 100 (default) there is a 1/100 (i.e. 1% chance) that a garbage collection event will occur on session start. **This is only used with `MySQLNoEventSession`**.
+ - `Config::CFG_SAVE_CLI` - whether to save/write session data in CLI mode (default: false)

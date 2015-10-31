@@ -152,7 +152,7 @@
                     //@codeCoverageIgnoreStart
                 } catch (PDOException $e) {
                     $this->log->error('Failed to write session data for ' . $sessionID . ': ' . $e->getMessage());
-                } finally {
+
                     return false;
                 }
             }
