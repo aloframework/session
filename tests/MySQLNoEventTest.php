@@ -2,8 +2,8 @@
 
     namespace AloFramework\Session\Tests;
 
-    use AloFramework\Session\MySQLNoEventSession as Sess;
     use AloFramework\Session\Config as Cfg;
+    use AloFramework\Session\MySQLNoEventSession as Sess;
     use PDO;
 
     require_once 'MySQLTest.php';
@@ -21,9 +21,10 @@
 
         function testGc() {
             $gc  = 1;
-            $cfg = new Cfg([Cfg::CFG_SECURE  => false,
-                            Cfg::CFG_TIMEOUT => $gc,
-                            Cfg::CFG_GC      => $gc]);
+            $cfg = new Cfg([Cfg::CFG_SECURE   => false,
+                            Cfg::CFG_TIMEOUT  => $gc,
+                            Cfg::CFG_SAVE_CLI => true,
+                            Cfg::CFG_GC       => $gc]);
 
             $sess                 = (new Sess($this->client, $cfg))->start();
             $id                   = session_id();

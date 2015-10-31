@@ -6,10 +6,14 @@
     use AloFramework\Session\RedisSession as Sess;
     use PHPUnit_Framework_TestCase;
 
-    class IdentityCheckFail extends Sess {
+    class ProtectedChecks extends Sess {
 
-        function theCheck($sessionID) {
+        function idCheck($sessionID) {
             parent::handleIdentityCheckFailure($sessionID);
+        }
+
+        function shouldBeSavedCheck() {
+            return $this->shouldBeSaved();
         }
     }
 
@@ -20,7 +24,18 @@
 
         function __construct($name = null, array $data = [], $dataName = '') {
             parent::__construct($name, $data, $dataName);
-            $this->cfg = new Cfg([Cfg::CFG_SECURE => false]);
+            $this->cfg = new Cfg([Cfg::CFG_SECURE   => false,
+                                  Cfg::CFG_SAVE_CLI => true]);
+        }
+
+        function checkSouldBeSaved() {
+            $red = new \Redis();
+            $red->connect('127.0.0.1');
+
+            $sess = new ProtectedChecks($red, $this->cfg);
+            $this->assertTrue($sess->shouldBeSavedCheck());
+            $sess->addConfig(Cfg::CFG_SAVE_CLI, false);
+            $this->assertFalse($sess->shouldBeSavedCheck());
         }
 
         function testDestruct() {
@@ -129,12 +144,12 @@
         }
 
         function testBadIdentityCheck() {
-            /** @var IdentityCheckFail $sess */
+            /** @var ProtectedChecks $sess */
             $red = new \Redis();
             $red->connect('127.0.0.1');
 
             $this->assertFalse(Sess::isActive());
-            $sess                 = (new IdentityCheckFail($red, $this->cfg))->start();
+            $sess = (new ProtectedChecks($red, $this->cfg))->start();
             $sid                  = session_id();
             $prefix               = $this->cfg->prefix . $sid;
             $_SESSION[__METHOD__] = 1;
@@ -143,7 +158,7 @@
             $this->assertTrue(Sess::isActive());
             $this->assertTrue($red->exists($prefix));
 
-            $sess->theCheck($sid);
+            $sess->idCheck($sid);
 
             $this->assertFalse(Sess::isActive());
             $this->assertFalse($red->exists($prefix));

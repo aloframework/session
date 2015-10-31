@@ -122,6 +122,7 @@
 
                 return '';
             }
+
             //@codeCoverageIgnoreEnd
 
             return '';
@@ -141,18 +142,23 @@
          *              internally to PHP for processing.
          */
         function write($sessionID, $sessionData) {
-            try {
-                $sql  = $this->client->prepare('REPLACE INTO `' . $this->config->table . '`(`id`,`data`) VALUES(?,?)');
-                $exec = $sql->execute([$sessionID, $sessionData]);
+            if ($this->shouldBeSaved()) {
+                try {
+                    $sql  =
+                        $this->client->prepare('REPLACE INTO `' . $this->config->table . '`(`id`,`data`) VALUES(?,?)');
+                    $exec = $sql->execute([$sessionID, $sessionData]);
 
-                return $exec;
-                //@codeCoverageIgnoreStart
-            } catch (PDOException $e) {
-                $this->log->error('Failed to write session data for ' . $sessionID . ': ' . $e->getMessage());
-
-                return false;
+                    return $exec;
+                    //@codeCoverageIgnoreStart
+                } catch (PDOException $e) {
+                    $this->log->error('Failed to write session data for ' . $sessionID . ': ' . $e->getMessage());
+                } finally {
+                    return false;
+                }
             }
-            //@codeCoverageIgnoreEns
+
+            return false;
         }
+        //@codeCoverageIgnoreEnd
 
     }

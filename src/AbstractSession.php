@@ -6,9 +6,9 @@
     use AloFramework\Config\Configurable;
     use AloFramework\Config\ConfigurableTrait;
     use AloFramework\Log\Log;
+    use ArrayAccess;
     use Psr\Log\LoggerInterface;
     use SessionHandlerInterface;
-    use ArrayAccess;
 
     /**
      * Abstract session operations
@@ -171,6 +171,18 @@
         }
 
         /**
+         * Close the session
+         * @author Art <a.molcanovas@gmail.com>
+         * @link   http://php.net/manual/en/sessionhandlerinterface.close.php
+         * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
+         *              internally to PHP for processing.
+         * @codeCoverageIgnore
+         */
+        function close() {
+            return true;
+        }
+
+        /**
          * Destroy a session
          * @author Art <a.molcanovas@gmail.com>
          * @link   http://php.net/manual/en/sessionhandlerinterface.destroy.php
@@ -218,30 +230,6 @@
         }
 
         /**
-         * Close the session
-         * @author Art <a.molcanovas@gmail.com>
-         * @link   http://php.net/manual/en/sessionhandlerinterface.close.php
-         * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
-         *              internally to PHP for processing.
-         * @codeCoverageIgnore
-         */
-        function close() {
-            return true;
-        }
-
-        /**
-         * Trigger an error when an operation requires an active session, but one isn't active
-         * @author Art <a.molcanovas@gmail.com>
-         *
-         * @param string $method The method used
-         */
-        private function sessionRequiredWarning($method) {
-            trigger_error($method . ' failed: the session must be started first');
-            //@codeCoverageIgnoreStart
-        }
-        //@codeCoverageIgnoreEnd
-
-        /**
          * Whether a offset exists
          * @author Art <a.molcanovas@gmail.com>
          * @link   http://php.net/manual/en/arrayaccess.offsetexists.php
@@ -260,6 +248,44 @@
             }
 
             return isset($_SESSION[$offset]);
+        }
+        //@codeCoverageIgnoreEnd
+
+        /**
+         * Trigger an error when an operation requires an active session, but one isn't active
+         * @author Art <a.molcanovas@gmail.com>
+         *
+         * @param string $method The method used
+         */
+        private function sessionRequiredWarning($method) {
+            trigger_error($method . ' failed: the session must be started first');
+            //@codeCoverageIgnoreStart
+        }
+
+        /**
+         * Magic getter
+         * @author Art <a.molcanovas@gmail.com>
+         *
+         * @param string $key The key to get
+         *
+         * @return mixed
+         * @uses   AbstractSession::offsetGet()
+         */
+        function __get($key) {
+            return $this->offsetGet($key);
+        }
+
+        /**
+         * Magic setter
+         * @author Art <a.molcanovas@gmail.com>
+         *
+         * @param string $key   Key to set
+         * @param mixed  $value Value to set
+         *
+         * @uses   AbstractSession::offsetSet()
+         */
+        function __set($key, $value) {
+            $this->offsetSet($key, $value);
         }
 
         /**
@@ -323,32 +349,6 @@
         }
 
         /**
-         * Magic getter
-         * @author Art <a.molcanovas@gmail.com>
-         *
-         * @param string $key The key to get
-         *
-         * @return mixed
-         * @uses   AbstractSession::offsetGet()
-         */
-        function __get($key) {
-            return $this->offsetGet($key);
-        }
-
-        /**
-         * Magic setter
-         * @author Art <a.molcanovas@gmail.com>
-         *
-         * @param string $key   Key to set
-         * @param mixed  $value Value to set
-         *
-         * @uses   AbstractSession::offsetSet()
-         */
-        function __set($key, $value) {
-            $this->offsetSet($key, $value);
-        }
-
-        /**
          * Saves session data
          * @author Art <a.molcanovas@gmail.com>
          */
@@ -356,5 +356,17 @@
             if (self::isActive()) {
                 session_write_close();
             }
+        }
+
+        /**
+         * Checks if the session should be saved/written
+         * @author Art <a.molcanovas@gmail.com>
+         * @return bool
+         * @since  1.1
+         */
+        protected function shouldBeSaved() {
+            $isCli = Alo::isCliRequest();
+
+            return !$isCli || ($isCli && $this->config->saveCLI);
         }
     }

@@ -105,7 +105,9 @@
          *              internally to PHP for processing.
          */
         function write($sessionID, $sessionData) {
-            return $this->client->setex($this->config->prefix . $sessionID, $this->config->timeout, $sessionData);
+            return $this->shouldBeSaved() && $this->client->setex($this->config->prefix . $sessionID,
+                                                                  $this->config->timeout,
+                                                                  $sessionData);
         }
 
     }
