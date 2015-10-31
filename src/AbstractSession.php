@@ -249,7 +249,6 @@
 
             return isset($_SESSION[$offset]);
         }
-        //@codeCoverageIgnoreEnd
 
         /**
          * Trigger an error when an operation requires an active session, but one isn't active
@@ -261,6 +260,7 @@
             trigger_error($method . ' failed: the session must be started first');
             //@codeCoverageIgnoreStart
         }
+        //@codeCoverageIgnoreEnd
 
         /**
          * Magic getter
