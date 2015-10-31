@@ -7,6 +7,7 @@
     /**
      * Configuration class
      * @author Art <a.molcanovas@gmail.com>
+     * @since  1.1 saveCLI added
      *
      * @property int    $timeout          Session timeout
      * @property string $cookie           Session cookie name
@@ -18,6 +19,7 @@
      * @property string $table            Which table to use if using SQL-based handlers
      * @property int    $gc               Garbage collection probability. If set to 100 (default) there is a 1/100
      *           (i.e. 1% chance) that a garbage collection event will occur on session start.
+     * @property bool   $saveCLI          Whether to save sessions in CLI mode. Defaults to false.
      */
     class Config extends AbstractConfig {
 
@@ -72,6 +74,13 @@
         const CFG_GC = 'gc';
 
         /**
+         * Whether to save sessions in CLI mode. Defaults to false.
+         * @var string
+         * @since 1.1
+         */
+        const CFG_SAVE_CLI = 'saveCLI';
+
+        /**
          * Default settings array
          * @var array
          */
@@ -101,7 +110,8 @@
                                    self::CFG_SESSION_ID_ALGO  => 'sha512',
                                    self::CFG_TABLE            => 'alo_session',
                                    self::CFG_SECURE           => true,
-                                   self::CFG_GC               => 100];
+                                   self::CFG_GC               => 100,
+                                   self::CFG_SAVE_CLI         => false];
             }
         }
     }

@@ -15,7 +15,8 @@
                          Cfg::CFG_SESSION_ID_ALGO  => 'sha512',
                          Cfg::CFG_SECURE           => true,
                          Cfg::CFG_TABLE            => 'alo_session',
-                         Cfg::CFG_GC               => 100];
+                         Cfg::CFG_GC               => 100,
+                         Cfg::CFG_SAVE_CLI         => false];
 
             $this->assertEquals($expected, (new Cfg())->getAll());
         }
