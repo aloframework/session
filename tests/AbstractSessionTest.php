@@ -6,17 +6,6 @@
     use AloFramework\Session\RedisSession as Sess;
     use PHPUnit_Framework_TestCase;
 
-    class ProtectedChecks extends Sess {
-
-        function idCheck($sessionID) {
-            parent::handleIdentityCheckFailure($sessionID);
-        }
-
-        function shouldBeSavedCheck() {
-            return $this->shouldBeSaved();
-        }
-    }
-
     class AbstractSessionTest extends PHPUnit_Framework_TestCase {
 
         /** @var Cfg */
@@ -36,6 +25,23 @@
             $this->assertTrue($sess->shouldBeSavedCheck());
             $sess->addConfig(Cfg::CFG_SAVE_CLI, false);
             $this->assertFalse($sess->shouldBeSavedCheck());
+        }
+
+        function testgetLastActiveSession() {
+            $red = new \Redis();
+            $red->connect('127.0.0.1');
+
+            $this->assertNull(Sess::getLastActiveSession());
+
+            (new Sess($red,$this->cfg))->start();
+            $this->assertTrue(Sess::getLastActiveSession() instanceof Sess);
+            session_write_close();
+            $this->assertNull(Sess::getLastActiveSession());
+            
+            (new Sess($red,$this->cfg))->start();
+            $this->assertTrue(Sess::getLastActiveSession() instanceof Sess);
+            session_destroy();
+            $this->assertNull(Sess::getLastActiveSession());
         }
 
         function testDestruct() {
@@ -182,5 +188,16 @@
 
             unset($sess['two']);
             $this->assertFalse(isset($_SESSION['two']));
+        }
+    }
+
+    class ProtectedChecks extends Sess {
+
+        function idCheck($sessionID) {
+            parent::handleIdentityCheckFailure($sessionID);
+        }
+
+        function shouldBeSavedCheck() {
+            return $this->shouldBeSaved();
         }
     }

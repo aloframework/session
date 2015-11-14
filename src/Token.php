@@ -76,7 +76,9 @@
          */
         private static function sessionRequiredWarning($method) {
             trigger_error($method . ' failed: the session must be started first', E_USER_WARNING);
+            //@codeCoverageIgnoreStart
         }
+        //@codeCoverageIgnoreEnd
 
         /**
          * Creates and returns a token
@@ -114,7 +116,9 @@
         function removeAllTokens() {
             if (!Sess::isActive()) {
                 self::sessionRequiredWarning(__METHOD__);
+                //@codeCoverageIgnoreStart
             }
+            //@codeCoverageIgnoreEnd
 
             if (isset($_SESSION[$this->tokenKey])) {
                 unset($_SESSION[$this->tokenKey]);

@@ -20,7 +20,7 @@
      * @property int    $gc               Garbage collection probability. If set to 100 (default) there is a 1/100
      *                                    (i.e. 1% chance) that a garbage collection event will occur on session start.
      * @property bool   $saveCLI          Whether to save sessions in CLI mode. Defaults to false.
-     * @property string $tokenKey         The session key to identify flashdata. You must not set any session values
+     * @property string $tokenKey         The session key to identify token data. You must not set any session values
      *                                    using this key.
      */
     class Config extends AbstractConfig {
@@ -83,7 +83,7 @@
         const CFG_SAVE_CLI = 'saveCLI';
 
         /**
-         * Key to identify flash data
+         * Key to identify token data
          * @var string
          * @since 1.2
          */
@@ -120,8 +120,8 @@
                                    self::CFG_TABLE            => 'alo_session',
                                    self::CFG_SECURE           => true,
                                    self::CFG_GC               => 100,
-                                   self::CFG_SAVE_CLI => false,
-                                   self::CFG_TOKEN    => '_tk_'];
+                                   self::CFG_SAVE_CLI         => false,
+                                   self::CFG_TOKEN            => '_tk_'];
             }
         }
     }

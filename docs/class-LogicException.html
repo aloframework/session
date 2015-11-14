@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class AloFramework\Session\SessionException | AloFramework Sessions 1.2 API</title>
+	<title>Class LogicException | AloFramework Sessions 1.2 API</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
@@ -28,7 +28,7 @@
 
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="namespace-AloFramework.Session.html" title="Summary of AloFramework\Session"><span>Namespace</span></a>
+						<a href="namespace-PHP.html" title="Summary of PHP"><span>Namespace</span></a>
 					</li>
 					<li class="active">
 <span>Class</span>					</li>
@@ -62,17 +62,17 @@
 		<div id="groups">
 				<h3>Namespaces</h3>
 			<ul>
-					<li class="active">
+					<li>
 						<a href="namespace-AloFramework.html">
 							AloFramework<span></span>
 						</a>
 							<ul>
-					<li class="active">
+					<li>
 						<a href="namespace-AloFramework.Session.html">
 							Session						</a>
 							</li>
 								</ul></li>
-					<li>
+					<li class="active">
 						<a href="namespace-PHP.html">
 							PHP						</a>
 							</li>
@@ -83,19 +83,22 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-AloFramework.Session.AbstractSession.html">AbstractSession</a></li>
-				<li><a href="class-AloFramework.Session.Config.html">Config</a></li>
-				<li><a href="class-AloFramework.Session.MySQLNoEventSession.html">MySQLNoEventSession</a></li>
-				<li><a href="class-AloFramework.Session.MySQLSession.html">MySQLSession</a></li>
-				<li><a href="class-AloFramework.Session.RedisSession.html">RedisSession</a></li>
-				<li><a href="class-AloFramework.Session.Token.html">Token</a></li>
+				<li><a href="class-PDO.html">PDO</a></li>
+				<li><a href="class-Redis.html">Redis</a></li>
 			</ul>
 
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-ArrayAccess.html">ArrayAccess</a></li>
+				<li><a href="class-SessionHandlerInterface.html">SessionHandlerInterface</a></li>
+			</ul>
 
 
 			<h3>Exceptions</h3>
 			<ul>
-				<li class="active"><a href="class-AloFramework.Session.SessionException.html">SessionException</a></li>
+				<li><a href="class-Exception.html">Exception</a></li>
+				<li><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></li>
+				<li class="active"><a href="class-LogicException.html">LogicException</a></li>
 			</ul>
 
 
@@ -108,12 +111,9 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class SessionException</h1>
+	<h1>Class LogicException</h1>
 
 
-	<div class="description">
-	<p>Session exceptions</p>
-	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
@@ -124,13 +124,19 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>AloFramework\Session\SessionException</span></b>			
+<b><span>LogicException</span></b>			
 			
 			
 		</dd>
 	</dl>
 
 
+	<div>
+		<h3>Direct known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code>
+		</p>
+	</div>
 
 
 
@@ -139,13 +145,12 @@
 
 	<div class="alert alert-info">
 		
+		<b>PHP Extension:</b> <a href="http://php.net/manual/en/book.spl.php" title="Go to PHP documentation">SPL</a><br>
 		
-		<b>Namespace:</b> <a href="namespace-AloFramework.html">AloFramework</a>\<a href="namespace-AloFramework.Session.html">Session</a><br>
 		
 
-				<b>Author:</b>
-				Art <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x61;&#x2e;&#x6d;&#x6f;&#x6c;&#x63;&#x61;&#x6e;&#x6f;&#x76;&#x61;&#x73;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> SessionException.php		<br>
+			<b>Documented at</b> <a href="http://php.net/manual/en/class.logicexception.php" title="Go to PHP documentation">php.net</a>
+		<br>
 	</div>
 
 
@@ -175,81 +180,6 @@
 
 
 
-
-		<div class="panel panel-default">
-            <div class="panel-heading"><h2>Constants summary</h2></div>
-			<table class="summary table table-bordered table-striped constants" id="constants">
-			<tr data-order="E_REDIS_NO_CONNECT" id="E_REDIS_NO_CONNECT">
-
-				<td class="attributes"><code>integer</code></td>
-				<td class="name">
-					<code>
-<b>E_REDIS_NO_CONNECT</b>					</code>
-
-					<div class="description short">
-						<p>Code when we're unable to connect to Redis</p>
-					</div>
-
-					<div class="description detailed hidden">
-						<p>Code when we're unable to connect to Redis</p>
-
-					</div>
-				</td>
-				<td class="value">
-					<div>
-						<a href="#E_REDIS_NO_CONNECT" class="anchor">#</a>
-						<code><span class="php-num">1</span></code>
-					</div>
-				</td>
-			</tr>
-			<tr data-order="E_SECURITY_ERROR" id="E_SECURITY_ERROR">
-
-				<td class="attributes"><code>integer</code></td>
-				<td class="name">
-					<code>
-<b>E_SECURITY_ERROR</b>					</code>
-
-					<div class="description short">
-						<p>Code when a critical security error occurs</p>
-					</div>
-
-					<div class="description detailed hidden">
-						<p>Code when a critical security error occurs</p>
-
-					</div>
-				</td>
-				<td class="value">
-					<div>
-						<a href="#E_SECURITY_ERROR" class="anchor">#</a>
-						<code><span class="php-num">2</span></code>
-					</div>
-				</td>
-			</tr>
-			<tr data-order="E_PDO_FORWARD" id="E_PDO_FORWARD">
-
-				<td class="attributes"><code>integer</code></td>
-				<td class="name">
-					<code>
-<b>E_PDO_FORWARD</b>					</code>
-
-					<div class="description short">
-						<p>A forwarding code for PDO exceptions</p>
-					</div>
-
-					<div class="description detailed hidden">
-						<p>A forwarding code for PDO exceptions</p>
-
-					</div>
-				</td>
-				<td class="value">
-					<div>
-						<a href="#E_PDO_FORWARD" class="anchor">#</a>
-						<code><span class="php-num">3</span></code>
-					</div>
-				</td>
-			</tr>
-			</table>
-		</div>
 
 
 

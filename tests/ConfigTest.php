@@ -16,7 +16,8 @@
                          Cfg::CFG_SECURE           => true,
                          Cfg::CFG_TABLE            => 'alo_session',
                          Cfg::CFG_GC               => 100,
-                         Cfg::CFG_SAVE_CLI         => false];
+                         Cfg::CFG_SAVE_CLI         => false,
+                         Cfg::CFG_TOKEN            => '_tk_'];
 
             $this->assertEquals($expected, (new Cfg())->getAll());
         }

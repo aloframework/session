@@ -58,10 +58,11 @@ Configuration is done via the [Configuration class](https://github.com/aloframew
 
  - `Config::CFG_TIMEOUT` - session lifetime in seconds (defaults to 300)
  - `Config::CFG_COOKIE_NAME` - how the session cookie will be named (defaults to AloSession)
- - `Config::CFG_FINGERPRINT_NAME` - the session key which will hold the session-hijacking prevention fingerprint. You cannot set any session keys with the same name because that would invalidate the session. Defaults to \_fp_.
+ - `Config::CFG_FINGERPRINT_NAME` - the session key which will hold the session-hijacking prevention fingerprint. You cannot set any session keys with the same name as that would invalidate the session. Defaults to \_fp_.
  - `Config::CFG_PREFIX` - how to prefix session keys if using cache-based handlers. Defaults to \_alo_sess_.
  - `Config::CFG_SESSION_ID_ALGO` - hashing algorithm to use for session IDs. Defaults to sha512.
  - `Config::CFG_TABLE` - table to use if using MySQL-based handlers. Defaults to alo_session.
  - `Config::CFG_SECURE` - if set to true, the session cookie will only be sent via HTTPS connections (defaults to `true`).
  - `Config::CFG_GC` - garbage collection probability. If set to 100 (default) there is a 1/100 (i.e. 1% chance) that a garbage collection event will occur on session start. **This is only used with `MySQLNoEventSession`**.
  - `Config::CFG_SAVE_CLI` - whether to save/write session data in CLI mode (default: false)
+ - `Config::CFG_TOKEN` - The session key to identify token data. You must not set any session values using this key as that would invalidate the tokens. Defaults to \_tk_.
