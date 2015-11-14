@@ -12,14 +12,16 @@
      * @property int    $timeout          Session timeout
      * @property string $cookie           Session cookie name
      * @property string $fingerprint      Session fingerprint name. This is used to prevent session hijacking and you
-     *           must not set any session values using this key.
+     *                                    must not set any session values using this key.
      * @property string $prefix           How to prefix session keys if using cache engine-based handlers
      * @property bool   $secure           If set to true the session cookie will only be sent via HTTPS connections
      * @property string $sessionAlgo      Session ID generator hash algorithm
      * @property string $table            Which table to use if using SQL-based handlers
      * @property int    $gc               Garbage collection probability. If set to 100 (default) there is a 1/100
-     *           (i.e. 1% chance) that a garbage collection event will occur on session start.
+     *                                    (i.e. 1% chance) that a garbage collection event will occur on session start.
      * @property bool   $saveCLI          Whether to save sessions in CLI mode. Defaults to false.
+     * @property string $tokenKey         The session key to identify flashdata. You must not set any session values
+     *                                    using this key.
      */
     class Config extends AbstractConfig {
 
@@ -81,6 +83,13 @@
         const CFG_SAVE_CLI = 'saveCLI';
 
         /**
+         * Key to identify flash data
+         * @var string
+         * @since 1.2
+         */
+        const CFG_TOKEN = 'tokenKey';
+
+        /**
          * Default settings array
          * @var array
          */
@@ -111,7 +120,8 @@
                                    self::CFG_TABLE            => 'alo_session',
                                    self::CFG_SECURE           => true,
                                    self::CFG_GC               => 100,
-                                   self::CFG_SAVE_CLI         => false];
+                                   self::CFG_SAVE_CLI => false,
+                                   self::CFG_TOKEN    => '_tk_'];
             }
         }
     }

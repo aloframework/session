@@ -20,6 +20,11 @@
         use ConfigurableTrait;
 
         /**
+         * The last started session object. This is reset back to null after the session is destroyed or closed.
+         * @var self
+         */
+        private static $activeSession;
+        /**
          * Logger instance
          * @var LoggerInterface
          */
@@ -99,6 +104,16 @@
         }
 
         /**
+         * Returns the last started session object. This is reset back to null after the session is destroyed or closed.
+         * @author Art <a.molcanovas@gmail.com>
+         * @return self
+         * @since  1.2
+         */
+        static function getLastActiveSession() {
+            return self::$activeSession;
+        }
+
+        /**
          * Starts the session
          * @author Art <a.molcanovas@gmail.com>
          * @return self
@@ -116,6 +131,7 @@
             }
             //@codeCoverageIgnoreEnd
 
+            self::$activeSession = &$this;
             session_set_cookie_params($this->config->timeout, '/', null, $this->config->secure, true);
             session_name($this->config->cookie);
 
@@ -179,6 +195,8 @@
          * @codeCoverageIgnore
          */
         function close() {
+            self::$activeSession = null;
+
             return true;
         }
 
@@ -194,6 +212,7 @@
          */
         function destroy($sessionID) {
             $this->log->info('Destroyed session ' . $sessionID);
+            self::$activeSession = null;
 
             return setcookie($this->config->cookie, '', time() - 3, null, null, $this->config->secure, true);
         }
@@ -240,7 +259,7 @@
          */
         function offsetExists($offset) {
             if (!self::isActive()) {
-                $this->sessionRequiredWarning(__METHOD__);
+                self::sessionRequiredWarning(__METHOD__);
 
                 //@codeCoverageIgnoreStart
                 return false;
@@ -256,8 +275,8 @@
          *
          * @param string $method The method used
          */
-        private function sessionRequiredWarning($method) {
-            trigger_error($method . ' failed: the session must be started first');
+        private static function sessionRequiredWarning($method) {
+            trigger_error($method . ' failed: the session must be started first', E_USER_WARNING);
             //@codeCoverageIgnoreStart
         }
         //@codeCoverageIgnoreEnd
@@ -299,7 +318,7 @@
          */
         function offsetGet($offset) {
             if (!self::isActive()) {
-                $this->sessionRequiredWarning(__METHOD__);
+                self::sessionRequiredWarning(__METHOD__);
 
                 //@codeCoverageIgnoreStart
                 return null;
@@ -321,7 +340,7 @@
          */
         function offsetSet($offset, $value) {
             if (!self::isActive()) {
-                $this->sessionRequiredWarning(__METHOD__);
+                self::sessionRequiredWarning(__METHOD__);
                 //@codeCoverageIgnoreStart
             } else {
                 //@codeCoverageIgnoreEnd
@@ -340,7 +359,7 @@
          */
         function offsetUnset($offset) {
             if (!self::isActive()) {
-                $this->sessionRequiredWarning(__METHOD__);
+                self::sessionRequiredWarning(__METHOD__);
                 //@codeCoverageIgnoreStart
             } else {
                 //@codeCoverageIgnoreEnd
