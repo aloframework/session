@@ -7,7 +7,9 @@
     use AloFramework\Config\ConfigurableTrait;
     use AloFramework\Log\Log;
     use ArrayAccess;
+    use JsonSerializable;
     use Psr\Log\LoggerInterface;
+    use Serializable;
     use SessionHandlerInterface;
 
     /**
@@ -15,7 +17,8 @@
      * @author Art <a.molcanovas@gmail.com>
      * @property Config $config
      */
-    abstract class AbstractSession implements SessionHandlerInterface, Configurable, ArrayAccess {
+    abstract class AbstractSession
+        implements SessionHandlerInterface, Configurable, ArrayAccess, JsonSerializable, Serializable {
 
         use ConfigurableTrait;
 
@@ -41,6 +44,55 @@
             $this->config = Alo::ifnull($cfg, new Config());
             $this->log    = Alo::ifnull($logger, new Log());
             $this->setID();
+        }
+
+        /**
+         * String representation of object
+         * @link  http://php.net/manual/en/serializable.serialize.php
+         * @return string the string representation of the object or null
+         * @since 5.1.0
+         */
+        public function serialize() {
+            return serialize(['cfg'    => $this->config,
+                              'log'    => $this->log,
+                              'active' => self::isActive(),
+                              'data'   => $this->jsonSerialize()]);
+        }
+
+        /**
+         * Constructs the object
+         * @author Art <a.molcanovas@gmail.com>
+         * @link   http://php.net/manual/en/serializable.unserialize.php
+         *
+         * @param string $serialized <p>
+         *                           The string representation of the object.
+         *                           </p>
+         *
+         * @since  1.3
+         */
+        public function unserialize($serialized) {
+            $un           = unserialize($serialized);
+            $this->log    = $un['log'];
+            $this->config = $un['cfg'];
+
+            if ($un['active']) {
+                self::destroySafely();
+                $this->start();
+                foreach ($un['data'] as $k => $v) {
+                    $_SESSION[$k] = $v;
+                }
+            }
+        }
+
+        /**
+         * Specify data which should be serialized to JSON
+         * @author Art <a.molcanovas@gmail.com>
+         * @link   http://php.net/manual/en/jsonserializable.jsonserialize.php
+         * @return array
+         * @since  1.3
+         */
+        function jsonSerialize() {
+            return self::isActive() ? $_SESSION : [];
         }
 
         /**
