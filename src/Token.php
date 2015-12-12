@@ -5,13 +5,15 @@
     use AloFramework\Common\Alo;
     use AloFramework\Session\AbstractSession as Sess;
     use InvalidArgumentException;
+    use JsonSerializable;
 
     /**
      * CSRF token management
      * @author Art <a.molcanovas@gmail.com>
-     * @since  1.2
+     * @since  1.3 is json serializable<br/>
+     *         1.2
      */
-    class Token {
+    class Token implements JsonSerializable {
 
         /**
          * Token key in the session array
@@ -48,6 +50,16 @@
             }
 
             $this->name = $name;
+        }
+
+        /**
+         * Returns a json-serializable version of this object
+         * @author Art <a.molcanovas@gmail.com>
+         * @return array
+         */
+        function jsonSerialize() {
+            return ['name' => $this->name,
+                    'key'  => $this->tokenKey];
         }
 
         /**

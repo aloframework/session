@@ -53,10 +53,10 @@
          * @since 5.1.0
          */
         public function serialize() {
-            return serialize(['cfg'    => $this->config,
-                              'log'    => $this->log,
-                              'active' => self::isActive(),
-                              'data'   => $this->jsonSerialize()]);
+            return serialize(['cfg'  => $this->config,
+                              'log'  => $this->log,
+                              'on'   => self::isActive(),
+                              'data' => $this->jsonSerialize()]);
         }
 
         /**
@@ -75,9 +75,12 @@
             $this->log    = $un['log'];
             $this->config = $un['cfg'];
 
-            if ($un['active']) {
+            if ($un['on']) {
                 self::destroySafely();
                 $this->start();
+            }
+
+            if ($un['data'] && self::isActive()) {
                 foreach ($un['data'] as $k => $v) {
                     $_SESSION[$k] = $v;
                 }

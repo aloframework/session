@@ -47,6 +47,26 @@
         }
 
         /**
+         * Sets the Redis instance to be used with the session handler. The instance bust be connected.
+         * @author Art <a.molcanovas@gmail.com>
+         * @param Redis $redis
+         * @return self
+         */
+        function setRedis(Redis $redis) {
+            $this->client = $redis;
+            return $this;
+        }
+
+        /**
+         * Unserializes the object. YOU MUST USE setRedis() after this or the handler won't work.
+         * @author Art <a.molcanovas@gmail.com>
+         * @param string $serialized
+         */
+        public function unserialize($serialized) {
+            parent::unserialize($serialized);
+        }
+
+        /**
          * Destroy a session
          * @author Art <a.molcanovas@gmail.com>
          * @link   http://php.net/manual/en/sessionhandlerinterface.destroy.php
