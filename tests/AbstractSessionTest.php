@@ -2,11 +2,17 @@
 
 namespace AloFramework\Session\Tests;
 
-use AloFramework\Session\Config;
+use AloFramework\Common\Alo;
 use AloFramework\Session\Config as Cfg;
 use AloFramework\Session\RedisSession as Sess;
 use PHPUnit_Framework_TestCase;
 use Redis;
+
+if (file_exists('vendor/autoload.php')) {
+    require_once 'vendor/autoload.php';
+} else {
+    require_once '../vendor/autoload.php';
+}
 
 class AbstractSessionTest extends PHPUnit_Framework_TestCase {
 
@@ -60,7 +66,7 @@ class AbstractSessionTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('s:3:"foo"', self::sessionUnserialize($this->redis->get($key))[__METHOD__]);
     }
 
-    protected static function sessionUnserialize($str) {
+    public static function sessionUnserialize($str) {
         $spl = explode(';', $str);
 
         foreach ($spl as $k => $s) {
@@ -76,18 +82,19 @@ class AbstractSessionTest extends PHPUnit_Framework_TestCase {
 
     function testJsonSerializeNoSession() {
         $sess = new Sess($this->redis, $this->cfg);
-        $this->assertEquals(json_encode([]), json_encode($sess));
+        $enc  = json_encode($sess);
+        $this->assertEquals(json_encode([]), $enc);
     }
 
     function testJsonSerializeSession() {
         $sess = new Sess($this->redis, $this->cfg);
         $sess->start();
-        $finger               = (new Config())->get(Config::CFG_FINGERPRINT_NAME);
+        $finger               = (new Cfg())->get(Cfg::CFG_FINGERPRINT_NAME);
         $_SESSION[__METHOD__] = 'bar';
-        $pattern              = '~{"' . $finger . '":"[a-z0-9]{32}","' . __METHOD__ . '":"bar"}~i';
-        $str                  = json_encode($sess);
+        $code                 = json_decode(json_encode($sess), true);
 
-        $this->assertEquals(1, preg_match($pattern, $str));
+        $this->assertEquals('bar', Alo::get($code[__METHOD__]));
+        $this->assertTrue(isset($code[$finger]));
     }
 
     function testDestroySafely() {
