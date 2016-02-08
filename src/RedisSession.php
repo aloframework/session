@@ -99,7 +99,9 @@ class RedisSession extends AbstractSession {
                                         $sessionData);
         }
 
+        // @codeCoverageIgnoreStart
         return true;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
