@@ -4,14 +4,13 @@ MySQL & Redis-based session management
 
 Latest release API documentation: [https://aloframework.github.io/session/](https://aloframework.github.io/session/)
 
-[![License](https://poser.pugx.org/aloframework/session/license?format=plastic)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+![License](https://poser.pugx.org/aloframework/session/license?format=plastic)
 [![Latest Stable Version](https://poser.pugx.org/aloframework/session/v/stable?format=plastic)](https://packagist.org/packages/aloframework/session)
 [![Total Downloads](https://poser.pugx.org/aloframework/session/downloads?format=plastic)](https://packagist.org/packages/aloframework/session)
 
 |                                                                                         dev-develop                                                                                         |                                                                                   Latest release                                                                                   |
 |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |                              [![Dev Build Status](https://travis-ci.org/aloframework/session.svg?branch=develop)](https://travis-ci.org/aloframework/session)                             |                        [![Release Build Status](https://travis-ci.org/aloframework/session.svg?branch=master)](https://travis-ci.org/aloframework/session)                       |
-| [![SensioLabsInsight](https://insight.sensiolabs.com/projects/6950d39a-3ea7-4c13-b912-bf7f7749d6ee/mini.png)](https://insight.sensiolabs.com/projects/6950d39a-3ea7-4c13-b912-bf7f7749d6ee) |                        [![SensioLabsInsight](https://i.imgur.com/KygqLtf.png)](https://insight.sensiolabs.com/projects/6950d39a-3ea7-4c13-b912-bf7f7749d6ee)                       |
 | [![Coverage Status](https://coveralls.io/repos/aloframework/session/badge.svg?branch=develop&amp;service=github)](https://coveralls.io/github/aloframework/session?branch=develop)        | [![Coverage Status](https://coveralls.io/repos/aloframework/session/badge.svg?branch=master&amp;service=github)](https://coveralls.io/github/aloframework/session?branch=master) |
 
 ## Installation ##

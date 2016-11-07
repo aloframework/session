@@ -1,164 +1,187 @@
 <?php
-
-namespace AloFramework\Session;
-
-use AloFramework\Session\SessionException as SEx;
-use PDO;
-use PDOException;
-use Psr\Log\LoggerInterface;
-
-/**
- * MySQL-based session handler
- * @author Art <a.molcanovas@gmail.com>
+    /**
+ *    Copyright (c) Arturas Molcanovas <a.molcanovas@gmail.com> 2016.
+ *    https://github.com/aloframework/session
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
-class MySQLSession extends AbstractSession {
+
+    namespace AloFramework\Session;
+
+    use AloFramework\Session\SessionException as SEx;
+    use PDO;
+    use PDOException;
+    use Psr\Log\LoggerInterface;
 
     /**
-     * The PDO instance
-     * @var PDO
-     */
-    protected $client;
-
-    /**
-     * Constructor
+     * MySQL-based session handler
+     *
      * @author Art <a.molcanovas@gmail.com>
-     *
-     * @param PDO $pdo PDO instance to use
-     * @param Config $cfg Your custom configuration
-     * @param LoggerInterface $logger A logger object. If omitted, AloFramework\Log will be used.
      */
-    function __construct(PDO $pdo, Config $cfg = null, LoggerInterface $logger = null) {
-        $this->client = $pdo;
+    class MySQLSession extends AbstractSession {
 
-        //Parent constructor must be called after $this->client is set
-        parent::__construct($cfg, $logger);
-    }
+        /**
+         * The PDO instance
+         *
+         * @var PDO
+         */
+        protected $client;
 
-    /**
-     * Destroy a session
-     * @author Art <a.molcanovas@gmail.com>
-     * @link   http://php.net/manual/en/sessionhandlerinterface.destroy.php
-     *
-     * @param string $sessionID The session ID being destroyed.
-     *
-     * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
-     * internally to PHP for processing.
-     */
-    function destroy($sessionID) {
-        parent::destroy($sessionID);
-        try {
-            $sql  = $this->client->prepare('DELETE FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 1');
-            $exec = $sql->execute([$sessionID]);
+        /**
+         * Constructor
+         *
+         * @author Art <a.molcanovas@gmail.com>
+         *
+         * @param PDO             $pdo    PDO instance to use
+         * @param Config          $cfg    Your custom configuration
+         * @param LoggerInterface $logger A logger object. If omitted, AloFramework\Log will be used.
+         */
+        public function __construct(PDO $pdo, Config $cfg = null, LoggerInterface $logger = null) {
+            $this->client = $pdo;
 
-            return $exec;
-            //@codeCoverageIgnoreStart
-        } catch (PDOException $e) {
-            $this->log->error('Failed to remove session ' . $sessionID . ' from database: ' . $e->getMessage());
-
-            return false;
-        }
-        //@codeCoverageIgnoreEnd
-    }
-
-    /**
-     * Read session data
-     * @author Art <a.molcanovas@gmail.com>
-     * @link   http://php.net/manual/en/sessionhandlerinterface.read.php
-     *
-     * @param string $sessionID The session id to read data for.
-     *
-     * @return string Returns an encoded string of the read data. If nothing was read, it must return an empty
-     *                string. Note this value is returned internally to PHP for processing.
-     */
-    function read($sessionID) {
-        try {
-            $sql = $this->client->prepare('SELECT `data` FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 1');
-
-            if ($sql->execute([$sessionID])) {
-                $exec = $sql->fetchAll(PDO::FETCH_COLUMN, 0);
-
-                //@codeCoverageIgnoreStart
-                if (!empty($exec)) {
-                    return $exec[0];
-                }
-                //@codeCoverageIgnoreEnd
-            }
-            //@codeCoverageIgnoreStart
-        } catch (PDOException $e) {
-            $this->log->error('Error while fetching session data for ' . $sessionID . ': ' . $e->getMessage());
-
-            return serialize('');
+            //Parent constructor must be called after $this->client is set
+            parent::__construct($cfg, $logger);
         }
 
-        //@codeCoverageIgnoreEnd
-
-        return '';
-    }
-
-    /**
-     * Write session data
-     * @author Art <a.molcanovas@gmail.com>
-     * @link   http://php.net/manual/en/sessionhandlerinterface.write.php
-     *
-     * @param string $sessionID The session id.
-     * @param string $sessionData The encoded session data. This data is the result of the PHP internally
-     *                             encoding the $_SESSION superglobal to a serialized string and passing it as
-     *                             this parameter. Please note sessions use an alternative serialization method.
-     *
-     * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
-     *              internally to PHP for processing.
-     */
-    function write($sessionID, $sessionData) {
-        if ($this->shouldBeSaved()) {
+        /**
+         * Destroy a session
+         *
+         * @author Art <a.molcanovas@gmail.com>
+         * @link   http://php.net/manual/en/sessionhandlerinterface.destroy.php
+         *
+         * @param string $sessionID The session ID being destroyed.
+         *
+         * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
+         * internally to PHP for processing.
+         */
+        public function destroy($sessionID) {
+            parent::destroy($sessionID);
             try {
-                $sql  =
-                    $this->client->prepare('REPLACE INTO `' . $this->config->table . '`(`id`,`data`) VALUES(?,?)');
-                $exec = $sql->execute([$sessionID, $sessionData]);
+                $sql = $this->client->prepare('DELETE FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 1');
+                $exec = $sql->execute([$sessionID]);
 
                 return $exec;
                 //@codeCoverageIgnoreStart
             } catch (PDOException $e) {
-                $this->log->error('Failed to write session data for ' . $sessionID . ': ' . $e->getMessage());
+                $this->log->error('Failed to remove session ' . $sessionID . ' from database: ' . $e->getMessage());
 
                 return false;
             }
+            //@codeCoverageIgnoreEnd
         }
 
-        return true;
-    }
+        /**
+         * Read session data
+         *
+         * @author Art <a.molcanovas@gmail.com>
+         * @link   http://php.net/manual/en/sessionhandlerinterface.read.php
+         *
+         * @param string $sessionID The session id to read data for.
+         *
+         * @return string Returns an encoded string of the read data. If nothing was read, it must return an empty
+         *                string. Note this value is returned internally to PHP for processing.
+         */
+        public function read($sessionID) {
+            try {
+                $sql = $this->client->prepare('SELECT `data` FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 1');
 
-    /**
-     * Check if the given session ID exists
-     * @author Art <a.molcanovas@gmail.com>
-     *
-     * @param string $sessionID The session ID
-     *
-     * @return bool
-     * @throws SEx On PDOException or general query failure
-     */
-    protected function idExists($sessionID) {
-        try {
-            $sql =
-                $this->client->prepare('SELECT COUNT(*) FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 0');
+                if ($sql->execute([$sessionID])) {
+                    $exec = $sql->fetchAll(PDO::FETCH_COLUMN, 0);
 
-            //@codeCoverageIgnoreStart
-            if (!$sql->execute([$sessionID])) {
-                throw new SEx('Failed to check if the session ID ' . $sessionID .
-                              ' exists: $sql->execute() returned ' . 'false', Sex::E_SECURITY_ERROR);
-            } else {
-                //@codeCoverageIgnoreEnd
-                $exec = $sql->fetchAll(PDO::FETCH_NUM);
+                    //@codeCoverageIgnoreStart
+                    if (!empty($exec)) {
+                        return $exec[0];
+                    }
+                    //@codeCoverageIgnoreEnd
+                }
+                //@codeCoverageIgnoreStart
+            } catch (PDOException $e) {
+                $this->log->error('Error while fetching session data for ' . $sessionID . ': ' . $e->getMessage());
 
-                return empty($exec) ? false : $exec[0] != 0;
+                return serialize('');
             }
-            //@codeCoverageIgnoreStart
-        } catch (PDOException $e) {
-            throw new SEx('Failed to check if the session ID ' . $sessionID . ' exists: ' . $e->getMessage(),
-                          SEx::E_PDO_FORWARD,
-                          $e);
+
+            //@codeCoverageIgnoreEnd
+
+            return '';
+        }
+
+        /**
+         * Write session data
+         *
+         * @author Art <a.molcanovas@gmail.com>
+         * @link   http://php.net/manual/en/sessionhandlerinterface.write.php
+         *
+         * @param string $sessionID    The session id.
+         * @param string $sessionData  The encoded session data. This data is the result of the PHP internally
+         *                             encoding the $_SESSION superglobal to a serialized string and passing it as
+         *                             this parameter. Please note sessions use an alternative serialization method.
+         *
+         * @return bool The return value (usually TRUE on success, FALSE on failure). Note this value is returned
+         *              internally to PHP for processing.
+         */
+        public function write($sessionID, $sessionData) {
+            if ($this->shouldBeSaved()) {
+                try {
+                    $sql =
+                        $this->client->prepare('REPLACE INTO `' . $this->config->table . '`(`id`,`data`) VALUES(?,?)');
+                    $exec = $sql->execute([$sessionID, $sessionData]);
+
+                    return $exec;
+                    //@codeCoverageIgnoreStart
+                } catch (PDOException $e) {
+                    $this->log->error('Failed to write session data for ' . $sessionID . ': ' . $e->getMessage());
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /**
+         * Check if the given session ID exists
+         *
+         * @author Art <a.molcanovas@gmail.com>
+         *
+         * @param string $sessionID The session ID
+         *
+         * @return bool
+         * @throws SEx On PDOException or general query failure
+         */
+        protected function idExists($sessionID) {
+            try {
+                $sql =
+                    $this->client->prepare('SELECT COUNT(*) FROM `' . $this->config->table . '` WHERE `id`=? LIMIT 0');
+
+                //@codeCoverageIgnoreStart
+                if (!$sql->execute([$sessionID])) {
+                    throw new SEx('Failed to check if the session ID ' . $sessionID .
+                                  ' exists: $sql->execute() returned ' . 'false', Sex::E_SECURITY_ERROR);
+                } else {
+                    //@codeCoverageIgnoreEnd
+                    $exec = $sql->fetchAll(PDO::FETCH_NUM);
+
+                    return empty($exec) ? false : $exec[0] != 0;
+                }
+                //@codeCoverageIgnoreStart
+            } catch (PDOException $e) {
+                throw new SEx('Failed to check if the session ID ' . $sessionID . ' exists: ' . $e->getMessage(),
+                              SEx::E_PDO_FORWARD,
+                              $e);
+            }
+            //@codeCoverageIgnoreEnd
         }
         //@codeCoverageIgnoreEnd
-    }
-    //@codeCoverageIgnoreEnd
 
-}
+    }
