@@ -25,7 +25,7 @@
     "issues": "https://github.com/aloframework/session/issues"
   },
   "require": {
-    "php": ">=5.4",
+    "php": ">=5.5",
     "aloframework/common": "^2.0",
     "aloframework/log": "^3.0",
     "aloframework/config": "^2.0"
