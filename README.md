@@ -24,30 +24,32 @@ MySQL-based sessions require an additional step which is described in [setup/MyS
 ## Usage ##
 All sessions use the same interface (bar the constructor), in this example Redis will be used.
 
-    <?php
+```php
+<?php
     
-        use AloFramework\Session\RedisSession;
+    use AloFramework\Session\RedisSession;
     
-        //Make our Redis connection
-        $redis = new Redis();
-        $redis->connect('127.0.0.1');
+    //Make our Redis connection
+    $redis = new Redis();
+    $redis->connect('127.0.0.1');
     
-        //Start our session. The redis parameter can be omitted, in which case the code above will be run automatically
-        // within the class
-        $sess = (new RedisSession($redis))->start();
+    //Start our session. The redis parameter can be omitted, in which case the code above will be run automatically
+    // within the class
+    $sess = (new RedisSession($redis))->start();
     
-        //That's it - you can now use the handler just like you would use a regular PHP session.
-        $_SESSION['foo'] = 'bar';
-        unset($_SESSION['qux']);
-        echo $_SESSION['baz'];
+    //That's it - you can now use the handler just like you would use a regular PHP session.
+    $_SESSION['foo'] = 'bar';
+    unset($_SESSION['qux']);
+    echo $_SESSION['baz'];
     
-        //Additionally, you can work directly with the RedisSession object via the ArrayAccess interface and magic
-        // getter+setter:
-        $sess->foo   = 'bar';
-        $sess['foo'] = 'bar';
-        unset($sess['foo']);
-        echo $sess->foo;
-        echo $_SESSION['foo'];
+    //Additionally, you can work directly with the RedisSession object via the ArrayAccess interface and magic
+    // getter+setter:
+    $sess->foo   = 'bar';
+    $sess['foo'] = 'bar';
+    unset($sess['foo']);
+    echo $sess->foo;
+    echo $_SESSION['foo'];
+```
 
 ### Logging ###
 An instance of `\Psr\Log\LoggerInterface` should be passed on to the constructor to make use of basic logging (almost everything is debug-level). If one isn't passed on, an instance of `\AloFramework\Log\Log` will be created with default parameters.
